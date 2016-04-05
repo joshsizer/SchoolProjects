@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;DICTIONARY_FILE_NAME&apos; in &apos;main.FrequencyAnalysis&apos; to &apos;DICTIONARY_FILE_PATH&apos;&#x0D;&#x0A;- Original project: &apos;CaesarCypher_FreqAnalysis&apos;&#x0D;&#x0A;- Original element: &apos;main.FrequencyAnalysis.DICTIONARY_FILE_NAME&apos;&#x0D;&#x0A;- Renamed element: &apos;main.FrequencyAnalysis.DICTIONARY_FILE_PATH&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;DICTIONARY_FILE_NAME&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;main{FrequencyAnalysis.java[FrequencyAnalysis^DICTIONARY_FILE_NAME" name="DICTIONARY_FILE_PATH" references="true" setter="false" stamp="1458003740665" textual="false" version="1.0"/>
+</session>

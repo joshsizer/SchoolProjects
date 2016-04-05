@@ -1,0 +1,52 @@
+package main;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main {
+	public static final Scanner userInput = new Scanner(System.in);
+	public static void main(String[] args) {
+		Library myLib;
+		try {
+			myLib = new Library(new File("books.txt"));
+			myLib.listBooks(5);
+			Book b = myLib.getBook("there ya go");
+			System.out.println(b.getISBN());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void addBooksFromUser(int num) {
+		String title = "";
+		String author = "";
+		String subject = "";
+		String ISBN = "";
+		String pages = "";
+		
+		for (int i = 1; i < num; i++) {
+			System.out.println("Book" + num + ":");
+			System.out.print("Enter title: ");
+			title = askTillNotEmpty();
+			System.out.print("Enter author: ");
+			author = askTillNotEmpty();
+			System.out.print("Enter subject: ");
+			subject = askTillNotEmpty();
+			System.out.print("Enter ISBN: ");
+			ISBN = askTillNotEmpty();
+			System.out.print("Enter pages: ");
+			pages = askTillNotEmpty();
+			
+			long l_ISBN = 1000000000;
+		}
+	}
+	public static String askTillNotEmpty() {
+		String input = userInput.nextLine();
+		while (input.isEmpty()) {
+			System.out.print("You must enter a value: ");
+			input = userInput.nextLine();
+		}
+		return input;
+	}
+}

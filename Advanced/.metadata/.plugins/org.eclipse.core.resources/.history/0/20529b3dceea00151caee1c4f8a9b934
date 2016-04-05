@@ -1,0 +1,29 @@
+package main;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class Main {
+	public static void main (String[] args) {
+		CaesarCipher cipher = new CaesarCipher((int)(Math.random()*26));
+		int offset = 0;
+		
+		try {
+			String encrypted = cipher.encrypt(new File("Drella.txt"));
+			System.out.println(encrypted);
+			offset = FrequencyAnalysis.getOffset(encrypted);
+			
+			CaesarCipher decrypt = new CaesarCipher(offset);
+			
+			System.out.println(decrypt.decrypt(encrypted));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(offset);
+		System.out.println("Offset: " + cipher.getOffset());
+	}
+	
+	
+}

@@ -1,0 +1,15 @@
+package main;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class Main {
+	public static void main (String[] args) {
+		CaesarCipher cipher = new CaesarCipher(-2);
+		
+		System.out.println(cipher.encrypt("hello there zebra. what a wonderfull day"));
+		System.out.println(cipher.decrypt(cipher.encrypt("hello there zebra. what a wonderfull day")));
+		System.out.println("Offset: " + cipher.getOffset());
+	}
+}

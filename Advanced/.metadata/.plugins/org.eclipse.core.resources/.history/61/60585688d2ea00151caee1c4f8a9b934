@@ -1,0 +1,69 @@
+package main;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main {
+	public static void main (String[] args) {
+		Scanner userInput = new Scanner(System.in);
+		CaesarCipher cipher;
+		String encryptOrDecrypt = "";
+		String fileOrConsole = "";
+		String text = "";
+		String filePath;
+		String key = "0";
+		String output = "";
+		
+		System.out.print("Would you like to encrypt(1) or decrypt(2)? ");
+		encryptOrDecrypt = userInput.nextLine();
+		
+		while (!is1or2(encryptOrDecrypt)) {
+			System.out.print("Invalid number. Enter a 1 or 2: ");
+			encryptOrDecrypt = userInput.nextLine();
+		}
+		
+		System.out.print("Would you like to read from a file(1) or from the console(2)? ");
+		fileOrConsole = userInput.nextLine();
+		
+		while (!is1or2(fileOrConsole)) {
+			System.out.print("Invalid number. Enter a 1 or 2: ");
+			fileOrConsole = userInput.nextLine();
+		}
+				
+		if (fileOrConsole.equals("1")) {
+			System.out.print("\nEnter file path: ");
+			filePath = userInput.nextLine();
+			
+			if (encryptOrDecrypt.equals("1")) {
+				System.out.print("Enter the key for encrypting: ");
+				key = userInput.nextLine();
+				while (!isNumber(key)) {
+					System.out.print("Invalid input. Enter a number: ");
+					key = userInput.nextLine();
+				}
+				
+				cipher = new CaesarCipher(Integer.parseInt(key));
+				
+				output = cipher.encrypt(new File(filePath));
+			}
+			
+			
+		} else {
+			System.out.print("\nEnter text: ");
+			text = userInput.nextLine();
+		}
+	}
+	
+	public static boolean is1or2(String num) {
+		return (num.length() == 1 && (num.charAt(0) == '1' || num.charAt(0) == '2'));
+	}
+	
+	public static boolean isNumber(String num) {
+		for (int i = 0; i < num.length(); i++) {
+			if (num.charAt(i) >= '0' && num.charAt(i) <= '9')
+				return true;
+		}
+		return false;
+	}
+}

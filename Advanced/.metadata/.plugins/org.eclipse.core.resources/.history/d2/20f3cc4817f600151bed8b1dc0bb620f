@@ -1,0 +1,18 @@
+package main;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+
+public class Main {
+	public static void main(String[] args) {
+		Library myLib = null;
+		
+		myLib = new Library();
+		
+		myLib.listBooks(2);
+		
+		myLib.addBook(new Book("yup", "yeah", "okay", 555L, 234));
+		
+		myLib.listBooks(2);
+	}
+}
