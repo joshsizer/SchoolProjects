@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Represents a box that can have text encrypted and decrypted, by direct substitution,
- * based on an offset
- * @author Josh
+ * Represents a cipher that can have text encrypted and decrypted, by direct substitution,
+ * based on an offset (key)
+ * @author Josh Sizer
  *
  */
 public class CaesarCipher {
@@ -21,7 +21,7 @@ public class CaesarCipher {
 	private final int k; 
 	
 	/** 
-	 * the positive only number to represent k, since -3 can be expressed as +23
+	 * the positive only number to represent k, since -3 can be expressed as +23 and 33 can be expressed as 7
 	 * this makes the decrypt logic much easier when wrapping around the ends of the alphabet
 	 */
 	private final int offset; 
@@ -32,14 +32,14 @@ public class CaesarCipher {
 	 */
 	public CaesarCipher(int k) {
 		this.k = k;
-		this.offset = bound0to26(this.k);
+		this.offset = bound0to25(this.k);
 	}
 	
 	/**
 	 * Encrypts a string by substituting every letter with the letter 
 	 * of the desired offset (as inputed into the constructor) away from the plain text.
 	 * @param plainText The text to be encrypted
-	 * @return The encrypted text, all uppercase with spaces kept. 
+	 * @return The encrypted text, all upper case with spaces kept. 
 	 */
 	public String encrypt(String plainText) {
 		String encryptedText = "";
@@ -63,7 +63,7 @@ public class CaesarCipher {
 	}
 	
 	/**
-	 * Decrypts a string by finding the orginal letter that was substituted with the inputed offset.
+	 * Decrypts a string by finding the original letter that was substituted with the inputed offset.
 	 * 
 	 * @param encryptedText The text to be decrypted
 	 * @return The decrypted, plain text
@@ -113,14 +113,18 @@ public class CaesarCipher {
 	
 	/**
 	 * 
-	 * @return The offset that this object was created with
+	 * @return The offset or key that this object was created with
 	 */
 	public int getOffset() {
 		return this.k;
 	}
 	
-	// adds or subtracts 26 until the argument is in the bound 0 to 26
-	private int bound0to26(int k) {
+	/** 
+	 * Adds or subtracts 26 until the argument is in the bound 0 to 25
+	 * @param k The value to bind
+	 * @return The equivalent value of k in the range of 0 to 25
+	 */
+	public static int bound0to25(int k) {
 		while (k > 25 || k < 0) {
 			if (k > 25)
 				k -= 26;
@@ -129,12 +133,13 @@ public class CaesarCipher {
 		}
 		return k;
 	}
+	
 	/**
 	 * Reads in text from a file.
 	 * 
 	 * @param file The file object representing the file to be read
 	 * @return A string with the complete file including carriage returns. 
-	 * @throws FileNotFoundException if the file passed can not be found on the file system
+	 * @throws FileNotFoundException If the file passed can not be found on the file system
 	 */
 	public static String readFile(File file) throws FileNotFoundException {
 		Scanner input = new Scanner(file);
@@ -152,11 +157,13 @@ public class CaesarCipher {
 	 * @param file The file object representing the file to write to
 	 * @param data The desired text to be written to the file
 	 * @throws IOException If something goes wrong in the process 
-	 * 			(can't find file or incorrect permissions 
+	 * 			(can't find file or incorrect permissions) 
 	 */
 	public static void writeToFile(File file, String data) throws IOException {
-		if (!file.exists())
-			file.mkdirs();
+		if (!file.exists()) {
+			if (file.getParentFile() != null)
+				file.getParentFile().mkdirs();
+		}
 		BufferedWriter output = new BufferedWriter(new FileWriter(file));
 		output.write(data);
 		output.close();
