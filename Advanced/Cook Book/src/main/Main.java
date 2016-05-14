@@ -3,9 +3,12 @@ package main;
 import java.util.ArrayList;
 
 import cookbook.Category;
+import cookbook.CookBook;
 import cookbook.Recipe;
+import gui.GUI;
 
 public class Main {
+	public static CookBook cookbook;
 	public static void main(String[] args) {
 		ArrayList<String> testIngredients = new ArrayList<String>();
 		ArrayList<String> testSteps = new ArrayList<String>();
@@ -35,6 +38,8 @@ public class Main {
 		categories.add(Category.VEGETARIAN);
 		
 		System.out.println(cookies);
+		
+		GUI gui = new GUI();
+		gui.display();
 	}
-
 }

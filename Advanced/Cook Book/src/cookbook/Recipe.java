@@ -129,22 +129,38 @@ public class Recipe {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof Recipe) {
-			Recipe recipe = (Recipe) o;
-			boolean containsIngredients = getIngredients()
-					.containsAll(recipe.getIngredients());
-			boolean stepsInOrder = getSteps().equals(recipe.getSteps());
-			return containsIngredients && stepsInOrder
-					&& getName().equals(recipe.getName())
-					&& getCatagories().containsAll(recipe.getCatagories());
+		if (!(o instanceof Recipe)) {
+			return false;
 		}
-		return false;
+		
+		Recipe recipe = (Recipe) o;
+		
+		boolean containsIngredients = getIngredients()
+				.containsAll(recipe.getIngredients());
+		
+		boolean stepsInOrder = getSteps().equals(recipe.getSteps());
+		
+		return containsIngredients && stepsInOrder
+				&& getName().equals(recipe.getName())
+				&& getCatagories().containsAll(recipe.getCatagories());
 	}
 
+	/**
+	 * Format:
+	 * 
+	 * Categories: X, Y, Z
+	 * Ingredients:
+	 * 		1 cup A
+	 * 		4 oz B
+	 * 
+	 * Steps: 
+	 * 		1. Do this first step
+	 * 		2. Do this second step
+	 */
 	@Override
 	public String toString() {
+		// formats the categories
 		String ret = "Categories: ";
-
 		for (int i = 0; i < categories.size(); i++) {
 			ret += Category.toString(categories.get(i));
 
@@ -153,14 +169,15 @@ public class Recipe {
 
 			ret += ", ";
 		}
-
+		
+		// formats the ingredients
 		ret += "\nIngredients:\n";
 		for (String currentIngredient : ingredients) {
 			ret += "\t" + currentIngredient + "\n";
 		}
-
+		
+		// formats the steps
 		ret += "\nSteps:\n";
-
 		for (int i = 0; i < steps.size(); i++) {
 			ret += "\t" + (i + 1) + ": " + steps.get(i) + "\n";
 		}

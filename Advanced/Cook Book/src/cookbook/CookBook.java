@@ -1,12 +1,23 @@
 package cookbook;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class CookBook {
+	private static CookBook instance;
+	
+	public static CookBook getInstance() {
+		if (instance == null)
+			instance = new CookBook();
+		return instance;
+	}
+	
+	private File saveLocation;
+	
 	/**
 	 * A list of all the recipes in this cook book
 	 */
-	private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+	private ArrayList<Recipe> recipes;
 
 	/**
 	 * Creates a blank cook book (no recipes).
@@ -71,5 +82,19 @@ public class CookBook {
 
 		return qualifiedRecipes;
 	}
-
+	
+	public File getSaveLocation() {
+		return saveLocation;
+	}
+	
+	public void save() {
+		if (saveLocation != null) {
+			
+		}
+	}
+	
+	public void save(File file) {
+		saveLocation = file;
+		save();
+	}
 }
