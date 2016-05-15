@@ -110,11 +110,11 @@ public class CookBook implements Serializable {
 	 *            The category, or "genre" of food
 	 * @return An <code>ArrayList</code> of recipes.
 	 */
-	public ArrayList<Recipe> getRecipies(int category) {
+	public ArrayList<Recipe> getRecipes(int category) {
 		ArrayList<Recipe> qualifiedRecipes = new ArrayList<Recipe>();
 
 		for (Recipe current : recipes) {
-			if (current.getCatagories().equals(category))
+			if (current.getCatagories().contains(category))
 				qualifiedRecipes.add(current);
 		}
 
@@ -181,10 +181,19 @@ public class CookBook implements Serializable {
 	 * @param file
 	 *            the file to save to
 	 * @throws IOException
-	 *             if the file connot be accessed
+	 *             if the file cannot be accessed
 	 */
 	public void save(File file) throws IOException {
 		setSaveLocation(file);
 		save();
+	}
+	
+	@Override
+	public String toString() {
+		String ret = "";
+		for (Recipe recipe : recipes) {
+			ret += recipe.toString() + "\n";
+		}
+		return ret;
 	}
 }

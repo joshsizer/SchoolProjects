@@ -20,7 +20,7 @@ public class Main {
 		ArrayList<Integer> categories2 = new ArrayList<Integer>();
 		
 		Recipe cookies = new Recipe("Cookies", categories, testIngredients, testSteps);
-		Recipe cookies2 = new Recipe("Cookies", categories, testIngredients2, testSteps2);
+		Recipe cookies2 = new Recipe("Butter", categories2, testIngredients2, testSteps2);
 		
 		testIngredients.add("1 oz Butter");
 		testIngredients.add("2 cups Milk");
@@ -37,7 +37,20 @@ public class Main {
 		categories.add(Category.BREAKFAST);
 		categories.add(Category.VEGETARIAN);
 		
-		System.out.println(cookies);
+		categories2.add(Category.BREAKFAST);
+		
+		//System.out.println(cookies);
+		//System.out.println(cookies2);
+		
+		//CookBook.getInstance().addRecipe(cookies);
+		//CookBook.getInstance().addRecipe(cookies2);
+		
+		ArrayList<Recipe> blah = new ArrayList<Recipe>();
+		blah = CookBook.getInstance().getRecipes(Category.BREAKFAST);
+		
+		for (Recipe recipe : blah) {
+			System.out.print(recipe.getName() + ", ");
+		}
 		
 		GUI gui = new GUI();
 		gui.display();

@@ -1,5 +1,6 @@
 package cookbook;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,9 @@ import java.util.ArrayList;
  * @author 18jsizer
  *
  */
-public class Recipe {
+public class Recipe implements Serializable {
+	private static final long serialVersionUID = -3957762872773045800L;
+
 	/**
 	 * The name of this recipe
 	 */
@@ -160,7 +163,7 @@ public class Recipe {
 	@Override
 	public String toString() {
 		// formats the categories
-		String ret = "Categories: ";
+		String ret = "Name: " + this.name + "\nCategories: ";
 		for (int i = 0; i < categories.size(); i++) {
 			ret += Category.toString(categories.get(i));
 
@@ -179,7 +182,11 @@ public class Recipe {
 		// formats the steps
 		ret += "\nSteps:\n";
 		for (int i = 0; i < steps.size(); i++) {
-			ret += "\t" + (i + 1) + ": " + steps.get(i) + "\n";
+			ret += "\t" + (i + 1) + ": " + steps.get(i);
+			if (i == steps.size() - 1) {
+				break;
+			}
+			ret += "\n";
 		}
 
 		return ret;
