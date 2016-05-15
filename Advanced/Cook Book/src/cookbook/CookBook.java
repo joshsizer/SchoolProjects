@@ -1,19 +1,57 @@
 package cookbook;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CookBook {
+public class CookBook implements Serializable {
+	private static final long serialVersionUID = -795614831645998443L;
+	public static final String extension = "ckb";
+
 	private static CookBook instance;
-	
+
+	/**
+	 * Returns the global instance of the cook book
+	 * 
+	 * @return the global cook book object
+	 */
 	public static CookBook getInstance() {
 		if (instance == null)
 			instance = new CookBook();
 		return instance;
 	}
 	
+	/**
+	 * Loads a serialized cook book object and returns it
+	 * 
+	 * @param file
+	 *            the file the object is stored in
+	 * @return the CookBook object that was serialized
+	 * @throws IOException
+	 *             if the file cannot be read
+	 * @throws ClassNotFoundException
+	 *             if this class cannot be found
+	 */
+	public static CookBook load(File file)
+			throws IOException, ClassNotFoundException {
+		FileInputStream fileIn = new FileInputStream(file);
+		ObjectInputStream in = new ObjectInputStream(fileIn);
+		CookBook cookBook = (CookBook) in.readObject();
+		in.close();
+		fileIn.close();
+		return cookBook;
+	}
+
+	/**
+	 * The file location to save to
+	 */
 	private File saveLocation;
-	
+
 	/**
 	 * A list of all the recipes in this cook book
 	 */
@@ -82,19 +120,71 @@ public class CookBook {
 
 		return qualifiedRecipes;
 	}
-	
+
+	/**
+	 * Sets the save location of this cook book. It will append the file
+	 * extension ".ckb" to the end if the file's path does not already end in
+	 * it.
+	 * 
+	 * @param file
+	 *            the file to save to
+	 */
+	public void setSaveLocation(File file) {
+		String absolutePath = file.getAbsolutePath();
+		int index = absolutePath.lastIndexOf('.');
+		if (index == -1) {
+			saveLocation = new File(absolutePath + "." + extension);
+			return;
+		}
+
+		String extension = absolutePath.substring(index);
+		if (extension.equals("." + CookBook.extension)) {
+			saveLocation = file;
+			return;
+		}
+
+		saveLocation = new File(absolutePath + "." + extension);
+	}
+
+	/**
+	 * Returns the currently set location to save this cook book to
+	 *
+	 * @return a <code>File</code> representing the location to save to.
+	 */
 	public File getSaveLocation() {
 		return saveLocation;
 	}
-	
-	public void save() {
-		if (saveLocation != null) {
-			
+
+	/**
+	 * Serializes, or saves, this object to the save location Nothing will be
+	 * saved if the save location is <code>null</code>
+	 * 
+	 * @throws IOException
+	 *             if the file cannot be accessed
+	 */
+	public void save() throws IOException {
+		if (saveLocation == null) {
+			return;
 		}
+		FileOutputStream fileOut = new FileOutputStream(saveLocation);
+		ObjectOutputStream out = new ObjectOutputStream(fileOut);
+		out.writeObject(this);
+		out.close();
+		fileOut.close();
+		System.out.printf(
+				"Serialized data saved in " + saveLocation.getAbsolutePath());
 	}
-	
-	public void save(File file) {
-		saveLocation = file;
+
+	/**
+	 * Serializes, or saves, this object to the specified file
+	 * 
+	 * @param file
+	 *            the file to save to
+	 * @throws IOException
+	 *             if the file connot be accessed
+	 */
+	public void save(File file) throws IOException {
+		setSaveLocation(file);
 		save();
 	}
 }

@@ -2,22 +2,32 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import cookbook.Category;
 import cookbook.CookBook;
 
 public class Actions {
+	static JFileChooser fileChooser = new JFileChooser();
+	static FileNameExtensionFilter filter 
+	= new FileNameExtensionFilter("Cook Book Files", CookBook.extension);
+	static {
+		fileChooser.setFileFilter(filter);
+	}
+	
 	/**
 	 * A class that handles a save event
+	 * 
 	 * @author Josh Sizer
 	 */
-	static public class SaveAction implements ActionListener {
+	public static class Save implements ActionListener {
 		boolean saveAs;
 		
-		public SaveAction(boolean saveAs) {
+		public Save(boolean saveAs) {
 			this.saveAs = saveAs;
 		}
 		
@@ -28,19 +38,45 @@ public class Actions {
 					|| CookBook.getInstance().getSaveLocation() == null;
 			
 			if (!i_saveAs) {
-				CookBook.getInstance().save();
+				try {
+					CookBook.getInstance().save();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				return;
 			}
 			
-			JFileChooser fileChooser = new JFileChooser();
 			if (fileChooser.showSaveDialog(saveButton) 
 					== JFileChooser.APPROVE_OPTION) {
-				CookBook.getInstance().save(fileChooser.getSelectedFile());
+				try {
+					CookBook.getInstance().save(fileChooser.getSelectedFile());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
+	
+	public static class Load implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent loadPressed) {
+			JMenuItem loadButton = (JMenuItem) loadPressed.getSource();
+			if (fileChooser.showOpenDialog(null)
+					== JFileChooser.APPROVE_OPTION) {
+				CookBook instance = CookBook.getInstance();
+				try {
+					instance = CookBook.load(fileChooser.getSelectedFile());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
 
-	static public class CategoryPressed implements ActionListener {
+	public static class CategoryPressed implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent menuPressed) {
 			// gets which category was pressed in the menu
