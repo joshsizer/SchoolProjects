@@ -27,7 +27,11 @@ public class CookBook implements Serializable {
 	}
 	
 	/**
-	 * Loads a serialized cook book object and returns it
+	 * Loads a serialized cook book object and and sets it
+	 * to be the global instance of the cook book. This class
+	 * is static because I could not figure out how to make 
+	 * a statement like <code>this = ObjectInputStream.readObject();
+	 * </code>
 	 * 
 	 * @param file
 	 *            the file the object is stored in
@@ -37,14 +41,13 @@ public class CookBook implements Serializable {
 	 * @throws ClassNotFoundException
 	 *             if this class cannot be found
 	 */
-	public static CookBook load(File file)
+	public static void load(File file)
 			throws IOException, ClassNotFoundException {
 		FileInputStream fileIn = new FileInputStream(file);
 		ObjectInputStream in = new ObjectInputStream(fileIn);
-		CookBook cookBook = (CookBook) in.readObject();
+		instance = (CookBook) in.readObject();
 		in.close();
 		fileIn.close();
-		return cookBook;
 	}
 
 	/**
@@ -119,6 +122,15 @@ public class CookBook implements Serializable {
 		}
 
 		return qualifiedRecipes;
+	}
+	
+	public String[] getRecipeNames() {
+		String[] array = new String[recipes.size()];
+		for (int i = 0; i < array.length; i++) {
+			array[i] = recipes.get(i).getName();
+		}
+		
+		return array;
 	}
 
 	/**

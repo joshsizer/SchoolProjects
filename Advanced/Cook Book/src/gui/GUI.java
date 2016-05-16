@@ -4,14 +4,17 @@ import java.awt.Dimension;
 
 public class GUI {
 	private Frame frame;
+	protected static int perferredHeight = 720;
+	protected static int perferredWidth = 1280;
+	protected static Dimension perferredSize = new Dimension(
+			perferredWidth, perferredHeight);
 	
 	public GUI() {
 		frame = new Frame();	
 	}
 	
 	public void display() {
-		Dimension frameSize = new Dimension(1280, 720);
-		frame.setSize(frameSize);
+		frame.setSize(perferredSize);
 		frame.setVisible(true);
 	}
 }

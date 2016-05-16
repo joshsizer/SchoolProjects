@@ -42,8 +42,8 @@ public class Main {
 		//System.out.println(cookies);
 		//System.out.println(cookies2);
 		
-		//CookBook.getInstance().addRecipe(cookies);
-		//CookBook.getInstance().addRecipe(cookies2);
+		CookBook.getInstance().addRecipe(cookies);
+		CookBook.getInstance().addRecipe(cookies2);
 		
 		ArrayList<Recipe> blah = new ArrayList<Recipe>();
 		blah = CookBook.getInstance().getRecipes(Category.BREAKFAST);

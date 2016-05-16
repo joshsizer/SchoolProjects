@@ -63,9 +63,9 @@ public class Actions {
 		public void showChooseFileDialogue() {
 			if (fileChooser
 					.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-				CookBook instance = CookBook.getInstance();
+				CookBook.getInstance();
 				try {
-					instance = CookBook.load(fileChooser.getSelectedFile());
+					CookBook.load(fileChooser.getSelectedFile());
 					System.out.println(CookBook.getInstance());
 				} catch (ClassNotFoundException | IOException e) {
 					e.printStackTrace();
