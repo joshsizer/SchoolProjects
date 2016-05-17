@@ -62,7 +62,7 @@ public class RecipePanel extends JPanel {
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		recipeListScrollPane.setVerticalScrollBarPolicy(
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		recipeListScrollPane.setPreferredSize(new Dimension(400, 100));
+		//recipeListScrollPane.setPreferredSize(new Dimension(400, 100));
 		recipeListScrollPane.setBorder(BorderFactory.createEmptyBorder(
 				20, 20, 20, 20));
 
@@ -86,14 +86,15 @@ public class RecipePanel extends JPanel {
 		recipeDisplayScrollPane.setVerticalScrollBarPolicy(
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+		JPanel buttonPanel = new JPanel();
 		showAll = new JButton("Show All");
 		showAll.setBorder(BorderFactory.createEmptyBorder(
 				20, 20, 20, 20));
-		showAll.setPreferredSize(new Dimension(20, 40));
+		buttonPanel.add(showAll);
 		
 		// recipeListScrollPane.add(recipeList);
 		leftPanel.add(recipeListScrollPane, BorderLayout.CENTER);
-		leftPanel.add(showAll, BorderLayout.PAGE_END);
+		leftPanel.add(buttonPanel, BorderLayout.PAGE_END);
 		rightPanel.add(recipeDisplayScrollPane);
 
 		add(leftPanel);
