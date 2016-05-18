@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -20,93 +21,103 @@ import cookbook.CookBook;
 
 @SuppressWarnings("serial")
 public class RecipePanel extends JPanel {
-	private Dimension leftPanelPerferredSize;
-	private Dimension scrollPanePerferredSize;
-	
-	private JPanel leftPanel;
-	private JPanel rightPanel;
-
-	private JScrollPane recipeDisplayScrollPane;
-	private JScrollPane recipeListScrollPane;
-
-	private JTextArea recipeTextArea;
-	private String defaultText;
-
-	private JList<String> recipeList;
-	
-	private JButton showAll;
-	private JButton edit;
+	private javax.swing.JButton edit;
+	private javax.swing.JMenu jMenu1;
+	private javax.swing.JMenu jMenu2;
+	private javax.swing.JMenuBar jMenuBar1;
+	private javax.swing.JScrollPane recipeDisplayScrollPane;
+	private javax.swing.JTextArea recipeDisplayTextArea;
+	private javax.swing.JLabel recipeLabel;
+	private javax.swing.JList<String> recipeList;
+	private javax.swing.JScrollPane recipeListScrollPane;
+	private javax.swing.JLabel recipeNameLabel;
+	private javax.swing.JButton showAll;
 
 	public RecipePanel() {
-		init();
+		initComponents();
 	}
 
-	private void init() {
-		leftPanelPerferredSize = new Dimension((int)(double)(GUI.perferredWidth * 0.30), 100);
-		scrollPanePerferredSize = new Dimension(100, (int)(double)(GUI.perferredHeight * 0.7));
-		setLayout(new BorderLayout());
+	private void initComponents() {
+		recipeDisplayScrollPane = new javax.swing.JScrollPane();
+		recipeDisplayTextArea = new javax.swing.JTextArea();
+		recipeListScrollPane = new javax.swing.JScrollPane();
+		recipeList = new javax.swing.JList<>();
+		recipeLabel = new javax.swing.JLabel();
+		showAll = new javax.swing.JButton();
+		edit = new javax.swing.JButton();
+		recipeNameLabel = new javax.swing.JLabel();
 		
-		initLeftPanel();
-		initRightPanel();
+		recipeDisplayScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-		add(leftPanel, BorderLayout.LINE_START);
-		add(rightPanel, BorderLayout.CENTER);
+		recipeDisplayTextArea.setColumns(20);
+		recipeDisplayTextArea.setLineWrap(true);
+		recipeDisplayTextArea.setRows(5);
+		recipeDisplayScrollPane.setViewportView(recipeDisplayTextArea);
+
+		recipeListScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+		recipeList.setModel(new javax.swing.AbstractListModel<String>() {
+			String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+
+			public int getSize() {
+				return strings.length;
+			}
+
+			public String getElementAt(int i) {
+				return strings[i];
+			}
+		});
+		recipeListScrollPane.setViewportView(recipeList);
+
+		recipeLabel.setText("Recipes");
+
+		showAll.setText("Show All");
+
+		edit.setText("Edit");
+
+		recipeNameLabel.setText("Name: ");
+		recipeNameLabel.setToolTipText("");
+
+		javax.swing.GroupLayout RecipePanelLayout = new javax.swing.GroupLayout(this);
+		setLayout(RecipePanelLayout);
+		RecipePanelLayout.setHorizontalGroup(RecipePanelLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(RecipePanelLayout.createSequentialGroup().addContainerGap().addGroup(RecipePanelLayout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addComponent(recipeListScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 101,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGroup(RecipePanelLayout.createSequentialGroup().addGap(10, 10, 10).addComponent(showAll,
+								javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(RecipePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RecipePanelLayout
+										.createSequentialGroup()
+										.addComponent(recipeDisplayScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE,
+												244, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap())
+								.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+										RecipePanelLayout.createSequentialGroup().addComponent(edit).addGap(107, 107,
+												107))))
+				.addGroup(RecipePanelLayout.createSequentialGroup().addGap(38, 38, 38).addComponent(recipeLabel)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(recipeNameLabel).addGap(149, 149, 149)));
+		RecipePanelLayout.setVerticalGroup(RecipePanelLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(RecipePanelLayout.createSequentialGroup().addGap(16, 16, 16)
+						.addGroup(RecipePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(recipeNameLabel).addComponent(recipeLabel))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(
+								RecipePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+										.addComponent(recipeListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 206,
+												Short.MAX_VALUE)
+										.addComponent(recipeDisplayScrollPane))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(RecipePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(showAll).addComponent(edit, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 	}
-	
-	private void initLeftPanel() {
-		leftPanel = new JPanel();
-		
-		leftPanel.setLayout(new BorderLayout(100, 100));
-		leftPanel.setPreferredSize(leftPanelPerferredSize);
-	
-		recipeList = new JList<String>(CookBook.getInstance().getRecipeNames());
-		recipeList.setLayoutOrientation(JList.VERTICAL);
-		// the recipe list is in a scroll pane, in case there are a lot
-		
-		recipeListScrollPane = new JScrollPane(recipeList);
-		recipeListScrollPane.setPreferredSize(scrollPanePerferredSize);
-		recipeListScrollPane.setHorizontalScrollBarPolicy(
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		recipeListScrollPane.setVerticalScrollBarPolicy(
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		recipeListScrollPane.setBorder(BorderFactory.createEmptyBorder(
-				20, 20, 20, 20));
-		
-		showAll = new JButton("Show All");
-
-		leftPanel.add(recipeListScrollPane, BorderLayout.PAGE_START);
-		leftPanel.add(showAll, BorderLayout.PAGE_END);
-	}
-	
-	private void initRightPanel() {
-		rightPanel = new JPanel();
-		rightPanel.setLayout(new BorderLayout(50, 50));
-
-		recipeTextArea = new JTextArea();
-		recipeDisplayScrollPane = new JScrollPane(recipeTextArea);		
-
-		if (CookBook.getInstance().getRecipes().size() == 0)
-			defaultText = "No recipes to display. Add recipe or load cook book.";
-		else {
-			defaultText = (CookBook.getInstance().getRecipes().get(0)
-					.toString());
-		}
-
-		recipeTextArea.setLineWrap(true);
-		recipeTextArea.setText(defaultText);
-
-		recipeDisplayScrollPane.setPreferredSize(scrollPanePerferredSize);
-		recipeDisplayScrollPane.setHorizontalScrollBarPolicy(
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		recipeDisplayScrollPane.setVerticalScrollBarPolicy(
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		recipeDisplayScrollPane.setBorder(BorderFactory.createEmptyBorder(
-				20, 20, 20, 20));
-		
-		edit = new JButton("Edit");
-		
-		rightPanel.add(recipeDisplayScrollPane, BorderLayout.PAGE_START);
-		rightPanel.add(edit, BorderLayout.PAGE_END);
-	}
-	
 }
