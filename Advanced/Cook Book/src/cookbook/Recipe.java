@@ -163,7 +163,7 @@ public class Recipe implements Serializable {
 	@Override
 	public String toString() {
 		// formats the categories
-		String ret = "Name: " + this.name + "\nCategories: ";
+		String ret = "Categories: ";
 		for (int i = 0; i < categories.size(); i++) {
 			ret += Category.toString(categories.get(i));
 

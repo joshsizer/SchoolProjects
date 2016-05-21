@@ -8,7 +8,7 @@ public class Frame extends JFrame {
 	 * The menu bar, the bar at the top that has "File" and all that jazz
 	 */
 	private MenuBar menuBar;
-	private RecipePanel recipePanel;
+	protected RecipePanel recipePanel;
 	protected EditPanel editPanel;
 
 	public Frame() {
@@ -18,6 +18,12 @@ public class Frame extends JFrame {
 		
 		setJMenuBar(menuBar);
 		super.getContentPane().add(recipePanel);
+	}
+	
+	@Override
+	public void repaint() {
+		recipePanel.paint();
+		super.repaint();
 	}
 	
 	public void showEditPanel() {

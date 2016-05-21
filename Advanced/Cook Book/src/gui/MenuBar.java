@@ -12,6 +12,7 @@ public class MenuBar extends JMenuBar {
 	 * The "File" menu, which contains options to save or save as.
 	 */
 	private JMenu file;
+	private JMenuItem neww;
 	private JMenuItem load;
 	private JMenuItem save;
 	private JMenuItem saveAs;
@@ -32,6 +33,7 @@ public class MenuBar extends JMenuBar {
 	 */
 	private void initMenu() {
 		file = new JMenu("File");
+		neww = new JMenuItem("New");
 		load = new JMenuItem("Load...");
 		save = new JMenuItem("Save");
 		saveAs = new JMenuItem("Save As...");
@@ -44,15 +46,16 @@ public class MenuBar extends JMenuBar {
 		for (int i = 0; i < categories.length; i++) {
 			CategoryMenuItem item = new CategoryMenuItem(Category.toString(i),
 					i);
-			item.addActionListener(new Actions.CategoryPressed());
+			item.addActionListener(new Actions.SortByCategory());
 			sort.add(item);
 			categories[i] = item;
 		}
 
-		load.addActionListener(new Actions.Load());
-		save.addActionListener(new Actions.Save(false));
-		saveAs.addActionListener(new Actions.Save(true));
+		load.addActionListener(new Actions.LoadCookBook());
+		save.addActionListener(new Actions.SaveCookBook(false));
+		saveAs.addActionListener(new Actions.SaveCookBook(true));
 
+		file.add(neww);
 		file.add(load);
 		file.add(save);
 		file.add(saveAs);

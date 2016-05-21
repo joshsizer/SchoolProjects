@@ -7,8 +7,7 @@ import cookbook.CookBook;
 import cookbook.Recipe;
 import gui.GUI;
 
-public class Main {
-	public static CookBook cookbook;
+public class Main {	
 	public static void main(String[] args) {
 		ArrayList<String> testIngredients = new ArrayList<String>();
 		ArrayList<String> testSteps = new ArrayList<String>();
@@ -31,8 +30,8 @@ public class Main {
 		testSteps.add("Cut butter into sugar");
 		testSteps.add("Mix dry ingredients into wet ingredients");
 		
-		testSteps2.add("Cut butter into sugar");
-		testSteps2.add("Mix dry ingredients into wet ingredients");
+		testSteps2.add("Get milk");
+		testSteps2.add("Churn milk");
 		
 		categories.add(Category.BREAKFAST);
 		categories.add(Category.VEGETARIAN);
@@ -44,15 +43,7 @@ public class Main {
 		
 		CookBook.getInstance().addRecipe(cookies);
 		CookBook.getInstance().addRecipe(cookies2);
-		
-		ArrayList<Recipe> blah = new ArrayList<Recipe>();
-		blah = CookBook.getInstance().getRecipes(Category.BREAKFAST);
-		
-		for (Recipe recipe : blah) {
-			System.out.print(recipe.getName() + ", ");
-		}
-		
-		GUI gui = new GUI();
-		gui.display();
+	
+		GUI.display();
 	}
 }

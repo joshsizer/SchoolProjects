@@ -8,15 +8,15 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class EditPanel extends JPanel {
-    private javax.swing.JButton cancel;
-    private javax.swing.JScrollPane ingredientsScrollPane;
-    private javax.swing.JTextArea ingredientsTextArea;
-    private javax.swing.JLabel noteLabel;
-    private javax.swing.JLabel recipeLabel;
-    private javax.swing.JLabel recipeNameLabel;
-    private javax.swing.JButton save;
-    private javax.swing.JScrollPane stepsScrollPane;
-    private javax.swing.JTextArea stepsTextArea;
+    protected javax.swing.JButton cancel;
+    protected javax.swing.JScrollPane ingredientsScrollPane;
+    protected javax.swing.JTextArea ingredientsTextArea;
+    protected javax.swing.JLabel noteLabel;
+    protected javax.swing.JLabel recipeLabel;
+    protected javax.swing.JLabel recipeNameLabel;
+    protected javax.swing.JButton save;
+    protected javax.swing.JScrollPane stepsScrollPane;
+    protected javax.swing.JTextArea stepsTextArea;
 
     public EditPanel() {
         initComponents();
@@ -51,7 +51,7 @@ public class EditPanel extends JPanel {
         save.setText("Save");
 
         cancel.setText("Cancel");
-        cancel.addActionListener(new Actions.CancelPressed());
+        cancel.addActionListener(new Actions.CancelEdit());
 
         recipeNameLabel.setText("Steps:");
         recipeNameLabel.setToolTipText("");

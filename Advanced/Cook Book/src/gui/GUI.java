@@ -16,5 +16,6 @@ public class GUI {
 	public static void display() {
 		frame.pack();
 		frame.setVisible(true);
+		frame.repaint();
 	}
 }

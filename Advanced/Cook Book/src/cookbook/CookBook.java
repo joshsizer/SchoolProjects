@@ -54,6 +54,17 @@ public class CookBook implements Serializable {
 	 * The file location to save to
 	 */
 	private File saveLocation;
+	
+	/**
+	 * Whether or not this object has been saved since last
+	 * edited
+	 */
+	private boolean saved;
+	
+	/**
+	 * The currently opened recipe
+	 */
+	private Recipe currentRecipe;
 
 	/**
 	 * A list of all the recipes in this cook book
@@ -75,6 +86,8 @@ public class CookBook implements Serializable {
 	 */
 	public CookBook(ArrayList<Recipe> recipes) {
 		this.recipes = recipes;
+		setCurrentRecipe(0);
+		saved = false;
 	}
 
 	/**
@@ -94,6 +107,8 @@ public class CookBook implements Serializable {
 	 */
 	public void addRecipe(Recipe recipe) {
 		recipes.add(recipe);
+		if (recipes.size() == 1) currentRecipe = recipe;
+		saved = false;
 	}
 
 	/**
@@ -104,6 +119,7 @@ public class CookBook implements Serializable {
 	 */
 	public void removeRecipe(Recipe recipe) {
 		recipes.remove(recipe);
+		saved = false;
 	}
 
 	/**
@@ -124,13 +140,27 @@ public class CookBook implements Serializable {
 		return qualifiedRecipes;
 	}
 	
-	public String[] getRecipeNames() {
-		String[] array = new String[recipes.size()];
+	private Recipe[] getRecipesAsArray(ArrayList<Recipe> recipes) {
+		Recipe[] array = new Recipe[recipes.size()];
 		for (int i = 0; i < array.length; i++) {
-			array[i] = recipes.get(i).getName();
+			array[i] = recipes.get(i);
 		}
 		
 		return array;
+	}
+	
+	/**
+	 * Gets all the recipes as an array. Useful for populating
+	 * a JList
+	 * 
+	 * @return This cook book's recipes as an array.
+	 */
+	public Recipe[] getRecipesAsArray() {
+		return getRecipesAsArray(this.recipes);
+	}
+	
+	public Recipe[] getRecipesAsArray(int category) {
+		return getRecipesAsArray(getRecipes(category));
 	}
 
 	/**
@@ -166,7 +196,25 @@ public class CookBook implements Serializable {
 	public File getSaveLocation() {
 		return saveLocation;
 	}
+	
+	/**
+	 * Returns the currently "opened" recipe.
+	 * 
+	 * @return the current recipe
+	 */
+	public Recipe getCurrentRecipe() {
+		return currentRecipe;
+	}
 
+	public void setCurrentRecipe(int index) {
+		if (index < recipes.size())
+			setCurrentRecipe(recipes.get(index));
+	}
+	
+	public void setCurrentRecipe(Recipe recipe) {
+			currentRecipe = recipe;
+	}
+	
 	/**
 	 * Serializes, or saves, this object to the save location Nothing will be
 	 * saved if the save location is <code>null</code>
@@ -185,6 +233,7 @@ public class CookBook implements Serializable {
 		fileOut.close();
 		System.out.printf(
 				"Serialized data saved in " + saveLocation.getAbsolutePath());
+		saved = true;
 	}
 
 	/**
@@ -198,6 +247,15 @@ public class CookBook implements Serializable {
 	public void save(File file) throws IOException {
 		setSaveLocation(file);
 		save();
+	}
+	
+	/**
+	 * Returns whether or not this cook book has been saved since edited. 
+	 * 
+	 * @return
+	 */
+	public boolean getSaveValue() {
+		return saved;
 	}
 	
 	@Override
