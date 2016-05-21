@@ -9,12 +9,34 @@ public class Frame extends JFrame {
 	 */
 	private MenuBar menuBar;
 	private RecipePanel recipePanel;
+	protected EditPanel editPanel;
 
 	public Frame() {
 		menuBar = new MenuBar();
 		recipePanel = new RecipePanel();
+		editPanel = new EditPanel();
 		
 		setJMenuBar(menuBar);
-		add(recipePanel);
+		super.getContentPane().add(recipePanel);
+	}
+	
+	public void showEditPanel() {
+		if (getContentPane().getComponent(0) == editPanel)
+			return;
+		
+		getContentPane().remove(recipePanel);
+		getContentPane().add(editPanel);
+		revalidate();
+		repaint();
+	}
+	
+	public void showRecipePanel() {
+		if (getContentPane().getComponent(0) == recipePanel)
+			return;
+		
+		getContentPane().remove(editPanel);
+		getContentPane().add(recipePanel);
+		revalidate();
+		repaint();
 	}
 }

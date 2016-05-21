@@ -3,17 +3,17 @@ package gui;
 import java.awt.Dimension;
 
 public class GUI {
-	private Frame frame;
-	protected static int perferredHeight = 400;
-	protected static int perferredWidth = 350;
+	protected static Frame frame;
+	protected static int perferredWidth = 680;
+	protected static int perferredHeight = 480;
 	protected static Dimension perferredSize = new Dimension(
 			perferredWidth, perferredHeight);
 	
-	public GUI() {
+	static {
 		frame = new Frame();
 	}
 	
-	public void display() {
+	public static void display() {
 		frame.pack();
 		frame.setVisible(true);
 	}

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -82,6 +83,23 @@ public class Actions {
 			CategoryMenuItem category = (CategoryMenuItem) menuPressed
 					.getSource();
 			System.out.println(Category.toString(category.getCategory()));
+		}
+	}
+	
+	public static class EditPressed implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			GUI.frame.showEditPanel();
+		}
+	}
+	
+	public static class CancelPressed implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			GUI.frame.showRecipePanel();
+			
 		}
 	}
 
