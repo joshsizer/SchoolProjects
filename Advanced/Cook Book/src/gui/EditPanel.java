@@ -8,15 +8,22 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class EditPanel extends JPanel {
-    protected javax.swing.JButton cancel;
-    protected javax.swing.JScrollPane ingredientsScrollPane;
-    protected javax.swing.JTextArea ingredientsTextArea;
-    protected javax.swing.JLabel noteLabel;
-    protected javax.swing.JLabel recipeLabel;
-    protected javax.swing.JLabel recipeNameLabel;
-    protected javax.swing.JButton save;
-    protected javax.swing.JScrollPane stepsScrollPane;
-    protected javax.swing.JTextArea stepsTextArea;
+	protected javax.swing.JButton addCategory;
+	protected javax.swing.JButton cancel;
+	protected javax.swing.JList<String> categoryList;
+	protected javax.swing.JScrollPane categoryListScrollPane;
+	protected javax.swing.JComboBox<String> categorySelection;
+	protected javax.swing.JScrollPane ingredientsScrollPane;
+	protected javax.swing.JTextArea ingredientsTextArea;
+	protected javax.swing.JLabel nameLabel;
+	protected javax.swing.JTextField nameTextField;
+	protected javax.swing.JLabel noteLabel;
+	protected javax.swing.JLabel recipeLabel;
+	protected javax.swing.JLabel recipeNameLabel;
+	protected javax.swing.JButton remove;
+	protected javax.swing.JButton save;
+	protected javax.swing.JScrollPane stepsScrollPane;
+	protected javax.swing.JTextArea stepsTextArea;
 
     public EditPanel() {
         initComponents();
@@ -32,6 +39,13 @@ public class EditPanel extends JPanel {
         cancel = new javax.swing.JButton();
         recipeNameLabel = new javax.swing.JLabel();
         noteLabel = new javax.swing.JLabel();
+        categoryListScrollPane = new javax.swing.JScrollPane();
+        categoryList = new javax.swing.JList<>();
+        addCategory = new javax.swing.JButton();
+        categorySelection = new javax.swing.JComboBox<>();
+        remove = new javax.swing.JButton();
+        nameTextField = new javax.swing.JTextField();
+        nameLabel = new javax.swing.JLabel();
 
         stepsScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -59,6 +73,25 @@ public class EditPanel extends JPanel {
 
         noteLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         noteLabel.setText("(Note: New lines separate ingredients and steps)");
+        
+        categoryListScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        categoryList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        categoryList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        categoryList.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
+        categoryListScrollPane.setViewportView(categoryList);
+
+        addCategory.setText("Add");
+
+        categorySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        remove.setText("Remove");
+
+        nameLabel.setText("Name:");
 
         javax.swing.GroupLayout editPanelLayout = new javax.swing.GroupLayout(this);
         setLayout(editPanelLayout);
@@ -71,29 +104,56 @@ public class EditPanel extends JPanel {
                         .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ingredientsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(recipeLabel))
-                        .addGap(13, 13, 13)
-                        .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(recipeNameLabel)
-                            .addComponent(stepsScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editPanelLayout.createSequentialGroup()
-                        .addComponent(noteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                        .addGap(48, 48, 48)
-                        .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancel)))
-                .addContainerGap())
+                        .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(editPanelLayout.createSequentialGroup()
+                                .addComponent(addCategory)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(categorySelection, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(remove)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editPanelLayout.createSequentialGroup()
+                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(editPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cancel))
+                                    .addGroup(editPanelLayout.createSequentialGroup()
+                                        .addComponent(recipeNameLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(nameLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(stepsScrollPane, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(categoryListScrollPane, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(26, 26, 26))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editPanelLayout.createSequentialGroup()
+                        .addComponent(noteLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(201, 201, 201))))
         );
         editPanelLayout.setVerticalGroup(
             editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(13, 13, 13)
                 .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(recipeNameLabel)
-                    .addComponent(recipeLabel))
+                    .addComponent(recipeLabel)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ingredientsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                    .addComponent(stepsScrollPane))
+                    .addComponent(ingredientsScrollPane)
+                    .addGroup(editPanelLayout.createSequentialGroup()
+                        .addComponent(stepsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                        .addGap(10, 10, 10)
+                        .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addCategory)
+                            .addComponent(categorySelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(remove))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(categoryListScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(save)

@@ -138,7 +138,7 @@ public class RecipePanel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RecipePanel().setVisible(true);
+                new EditPanel().setVisible(true);
             }
         });
     }
