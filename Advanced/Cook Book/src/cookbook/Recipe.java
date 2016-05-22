@@ -22,17 +22,17 @@ public class Recipe implements Serializable {
 	 * The categories to which this belong. A recipe has the potential to belong
 	 * to more than one category.
 	 */
-	private final ArrayList<Integer> categories;
+	private ArrayList<Integer> categories;
 
 	/**
 	 * The ingredients required for this recipe
 	 */
-	private final ArrayList<String> ingredients;
+	private ArrayList<String> ingredients;
 
 	/**
 	 * The steps required to make this recipe
 	 */
-	private final ArrayList<String> steps;
+	private ArrayList<String> steps;
 
 	/**
 	 * Initializes this recipe to have the specified ingredients and steps

@@ -146,7 +146,6 @@ public class Actions {
 	}
 	
 	public static class ShowAllRecipes implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			changeListValues(CookBook.getInstance().getRecipesAsArray());
@@ -154,11 +153,29 @@ public class Actions {
 	}
 	
 	public static class CancelEdit implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			GUI.frame.showRecipePanel();
-			
+		}
+	}
+	
+	public static class AddRecipe implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			CookBook.getInstance().setCurrentRecipe(null);
+			GUI.frame.showEditPanel();
+		}
+	}
+	
+	public static class SaveRecipe implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Recipe currentRecipe = CookBook.getInstance().getCurrentRecipe();
+			if (currentRecipe == null) {
+				String ingredients = GUI.frame.editPanel.ingredientsTextArea
+						.getText();
+				String steps = GUI.frame.editPanel.stepsTextArea.getText();
+			}
 		}
 	}
 	

@@ -49,6 +49,7 @@ public class EditPanel extends JPanel {
         recipeLabel.setText("Ingredients:");
 
         save.setText("Save");
+        save.addActionListener(new Actions.SaveRecipe());
 
         cancel.setText("Cancel");
         cancel.addActionListener(new Actions.CancelEdit());

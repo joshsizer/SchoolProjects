@@ -54,7 +54,7 @@ public class RecipePanel extends JPanel {
 		recipeList = new JList<Recipe>(
 				CookBook.getInstance().getRecipesAsArray());
 		recipeList.setCellRenderer(new RecipeRenderer());
-		
+
 		recipeList.addListSelectionListener(new Actions.RecipeSelected());
 		recipeListScrollPane.setViewportView(recipeList);
 
@@ -160,14 +160,14 @@ public class RecipePanel extends JPanel {
 	public void paint() {
 		String recipeString = "";
 		String nameString = "Name: ";
-    	Recipe cur = CookBook.getInstance().getCurrentRecipe();
+		Recipe cur = CookBook.getInstance().getCurrentRecipe();
 
-        if (CookBook.getInstance() != null && cur != null) {
-        	recipeString = cur.toString();
-        	nameString += cur.getName();
-        }
-    	
-        recipeDisplayTextArea.setText(recipeString);
-        recipeNameLabel.setText(nameString);
-    }
+		if (CookBook.getInstance() != null && cur != null) {
+			recipeString = cur.toString();
+			nameString += cur.getName();
+		}
+
+		recipeDisplayTextArea.setText(recipeString);
+		recipeNameLabel.setText(nameString);
+	}
 }

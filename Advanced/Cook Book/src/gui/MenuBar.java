@@ -22,6 +22,8 @@ public class MenuBar extends JMenuBar {
 	 */
 	private JMenu recipe;
 	private JMenu sort;
+	private JMenuItem add;
+	private JMenuItem remove;
 	private JMenuItem[] categories;
 
 	public MenuBar() {
@@ -39,6 +41,8 @@ public class MenuBar extends JMenuBar {
 		saveAs = new JMenuItem("Save As...");
 
 		recipe = new JMenu("Recipe");
+		add = new JMenuItem("Add");
+		remove = new JMenuItem("Remove");
 		sort = new JMenu("Sort");
 
 		categories = new CategoryMenuItem[Category.numberOfCategories];
@@ -54,11 +58,15 @@ public class MenuBar extends JMenuBar {
 		load.addActionListener(new Actions.LoadCookBook());
 		save.addActionListener(new Actions.SaveCookBook(false));
 		saveAs.addActionListener(new Actions.SaveCookBook(true));
+		
+		add.addActionListener(new Actions.AddRecipe());
 
 		file.add(neww);
 		file.add(load);
 		file.add(save);
 		file.add(saveAs);
+		recipe.add(add);
+		recipe.add(remove);
 		recipe.add(sort);
 
 		add(file);
