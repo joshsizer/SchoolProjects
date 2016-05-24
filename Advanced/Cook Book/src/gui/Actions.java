@@ -100,28 +100,6 @@ public class Actions {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			GUI.frame.showEditPanel();
-			Recipe currentRecipe = CookBook.getInstance().getCurrentRecipe();
-			
-			ArrayList<String> ingredients; 
-			String ingredientsOutput = "";
-			
-			ArrayList<String> steps;
-			String stepsOutput = "";
-			
-			if (currentRecipe != null) {
-				ingredients = currentRecipe.getIngredients();
-				for (String ingredient : ingredients) {
-					ingredientsOutput += ingredient + "\n";
-				}
-				
-				steps = currentRecipe.getSteps();
-				for (int i = 0; i < steps.size(); i++) {
-					stepsOutput += (i + 1) + ") " + steps.get(i) + "\n";
-				}
-			}
-
-			GUI.frame.editPanel.ingredientsTextArea.setText(ingredientsOutput);
-			GUI.frame.editPanel.stepsTextArea.setText(stepsOutput);
 		}
 	}
 	
@@ -155,6 +133,8 @@ public class Actions {
 	public static class CancelEdit implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			if (CookBook.getInstance().getCurrentRecipe() == null)
+				CookBook.getInstance().setCurrentRecipe(0);
 			GUI.frame.showRecipePanel();
 		}
 	}
