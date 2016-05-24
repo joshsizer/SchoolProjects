@@ -5,8 +5,15 @@
  */
 package gui;
 
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.LayoutStyle;
+import javax.swing.ScrollPaneConstants;
 
 import cookbook.CookBook;
 import cookbook.Recipe;
@@ -17,31 +24,31 @@ import cookbook.Recipe;
  */
 @SuppressWarnings("serial")
 public class RecipePanel extends JPanel {
-	protected javax.swing.JButton edit;
-	protected javax.swing.JScrollPane recipeDisplayScrollPane;
-	protected javax.swing.JTextArea recipeDisplayTextArea;
-	protected javax.swing.JLabel recipeLabel;
+	protected JButton edit;
+	protected JScrollPane recipeDisplayScrollPane;
+	protected JTextArea recipeDisplayTextArea;
+	protected JLabel recipeLabel;
 	protected JList<Recipe> recipeList;
-	protected javax.swing.JScrollPane recipeListScrollPane;
-	protected javax.swing.JLabel recipeNameLabel;
-	protected javax.swing.JButton showAll;
+	protected JScrollPane recipeListScrollPane;
+	protected JLabel recipeNameLabel;
+	protected JButton showAll;
 
 	public RecipePanel() {
 		initComponents();
 	}
 
 	private void initComponents() {
-		recipeDisplayScrollPane = new javax.swing.JScrollPane();
-		recipeDisplayTextArea = new javax.swing.JTextArea();
-		recipeListScrollPane = new javax.swing.JScrollPane();
-		recipeList = new javax.swing.JList<Recipe>();
-		recipeLabel = new javax.swing.JLabel();
-		showAll = new javax.swing.JButton();
-		edit = new javax.swing.JButton();
-		recipeNameLabel = new javax.swing.JLabel();
+		recipeDisplayScrollPane = new JScrollPane();
+		recipeDisplayTextArea = new JTextArea();
+		recipeListScrollPane = new JScrollPane();
+		recipeList = new JList<Recipe>();
+		recipeLabel = new JLabel();
+		showAll = new JButton();
+		edit = new JButton();
+		recipeNameLabel = new JLabel();
 
 		recipeDisplayScrollPane.setVerticalScrollBarPolicy(
-				javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		recipeDisplayTextArea.setColumns(20);
 		recipeDisplayTextArea.setLineWrap(true);
@@ -49,7 +56,7 @@ public class RecipePanel extends JPanel {
 		recipeDisplayScrollPane.setViewportView(recipeDisplayTextArea);
 
 		recipeListScrollPane.setHorizontalScrollBarPolicy(
-				javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		recipeList = new JList<Recipe>(
 				CookBook.getInstance().getRecipesAsArray());
@@ -68,37 +75,37 @@ public class RecipePanel extends JPanel {
 
 		recipeNameLabel.setToolTipText("");
 
-		javax.swing.GroupLayout RecipePanelLayout = new javax.swing.GroupLayout(
+		GroupLayout RecipePanelLayout = new GroupLayout(
 				this);
 		setLayout(RecipePanelLayout);
 		RecipePanelLayout.setHorizontalGroup(RecipePanelLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(RecipePanelLayout.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(RecipePanelLayout
 								.createParallelGroup(
-										javax.swing.GroupLayout.Alignment.LEADING)
+										GroupLayout.Alignment.LEADING)
 								.addGroup(RecipePanelLayout
 										.createSequentialGroup()
 										.addGroup(RecipePanelLayout
 												.createParallelGroup(
-														javax.swing.GroupLayout.Alignment.LEADING)
+														GroupLayout.Alignment.LEADING)
 												.addComponent(showAll)
 												.addComponent(
 														recipeListScrollPane,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
+														GroupLayout.PREFERRED_SIZE,
 														122,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+														GroupLayout.PREFERRED_SIZE))
 										.addGroup(RecipePanelLayout
 												.createParallelGroup(
-														javax.swing.GroupLayout.Alignment.LEADING)
+														GroupLayout.Alignment.LEADING)
 												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
+														GroupLayout.Alignment.TRAILING,
 														RecipePanelLayout
 																.createSequentialGroup()
 																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		LayoutStyle.ComponentPlacement.RELATED,
+																		GroupLayout.DEFAULT_SIZE,
 																		Short.MAX_VALUE)
 																.addComponent(
 																		edit))
@@ -108,7 +115,7 @@ public class RecipePanel extends JPanel {
 														.addGroup(
 																RecipePanelLayout
 																		.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
+																				GroupLayout.Alignment.LEADING)
 																		.addGroup(
 																				RecipePanelLayout
 																						.createSequentialGroup()
@@ -119,7 +126,7 @@ public class RecipePanel extends JPanel {
 																								Short.MAX_VALUE))
 																		.addComponent(
 																				recipeDisplayScrollPane,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
 																				244,
 																				Short.MAX_VALUE))))
 										.addContainerGap())
@@ -128,46 +135,32 @@ public class RecipePanel extends JPanel {
 										.addComponent(recipeLabel)
 										.addGap(149, 349, Short.MAX_VALUE)))));
 		RecipePanelLayout.setVerticalGroup(RecipePanelLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(RecipePanelLayout.createSequentialGroup()
 						.addGap(16, 16, 16)
 						.addGroup(RecipePanelLayout
 								.createParallelGroup(
-										javax.swing.GroupLayout.Alignment.BASELINE)
+										GroupLayout.Alignment.BASELINE)
 								.addComponent(recipeNameLabel)
 								.addComponent(recipeLabel))
 						.addPreferredGap(
-								javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+								LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(RecipePanelLayout
 								.createParallelGroup(
-										javax.swing.GroupLayout.Alignment.LEADING)
+										GroupLayout.Alignment.LEADING)
 								.addComponent(recipeListScrollPane,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE,
 										206, Short.MAX_VALUE)
 								.addComponent(recipeDisplayScrollPane))
 						.addPreferredGap(
-								javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								LayoutStyle.ComponentPlacement.RELATED)
 						.addGroup(RecipePanelLayout
 								.createParallelGroup(
-										javax.swing.GroupLayout.Alignment.BASELINE)
+										GroupLayout.Alignment.BASELINE)
 								.addComponent(showAll).addComponent(edit,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE))
 						.addGap(19, 19, 19)));
-	}
-
-	public void paint() {
-		String recipeString = "";
-		String nameString = "Name: ";
-		Recipe cur = CookBook.getInstance().getCurrentRecipe();
-
-		if (CookBook.getInstance() != null && cur != null) {
-			recipeString = cur.toString();
-			nameString += cur.getName();
-		}
-
-		recipeDisplayTextArea.setText(recipeString);
-		recipeNameLabel.setText(nameString);
 	}
 }

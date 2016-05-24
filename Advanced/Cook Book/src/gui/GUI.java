@@ -17,6 +17,6 @@ public class GUI {
 		frame.pack();
 		frame.setPreferredSize(perferredSize);
 		frame.setVisible(true);
-		frame.repaint();
+		frame.showRecipePanel();
 	}
 }

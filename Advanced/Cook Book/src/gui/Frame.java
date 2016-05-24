@@ -24,13 +24,7 @@ public class Frame extends JFrame {
 		setJMenuBar(menuBar);
 		super.getContentPane().add(recipePanel);
 	}
-	
-	@Override
-	public void repaint() {
-		recipePanel.paint();
-		super.repaint();
-	}
-	
+
 	public void showEditPanel() {
 		Recipe currentRecipe = CookBook.getInstance().getCurrentRecipe();
 		
@@ -64,10 +58,10 @@ public class Frame extends JFrame {
 			}
 		}
 
-		GUI.frame.editPanel.nameTextField.setText(name);
-		GUI.frame.editPanel.ingredientsTextArea.setText(ingredientsOutput);
-		GUI.frame.editPanel.stepsTextArea.setText(stepsOutput);
-		GUI.frame.editPanel.categoryList.setListData(categories);
+		editPanel.nameTextField.setText(name);
+		editPanel.ingredientsTextArea.setText(ingredientsOutput);
+		editPanel.stepsTextArea.setText(stepsOutput);
+		editPanel.categoryList.setListData(categories);
 		
 		if (getContentPane().getComponent(0) == editPanel)
 			return;
@@ -79,7 +73,27 @@ public class Frame extends JFrame {
 		repaint();
 	}
 	
-	public void showRecipePanel() {
+	public void showRecipePanel() {		
+		Recipe cur = CookBook.getInstance().getCurrentRecipe();
+
+		if (cur == null) {
+			CookBook.getInstance().setCurrentRecipe(0);
+			cur = CookBook.getInstance().getCurrentRecipe();
+		} else {
+			
+		}
+		
+		String recipeString = "";
+		String nameString = "Name: ";
+
+		if (CookBook.getInstance() != null && cur != null) {
+			recipeString = cur.toString();
+			nameString += cur.getName();
+		}
+
+		GUI.frame.recipePanel.recipeDisplayTextArea.setText(recipeString);
+		GUI.frame.recipePanel.recipeNameLabel.setText(nameString);
+		
 		if (getContentPane().getComponent(0) == recipePanel)
 			return;
 		

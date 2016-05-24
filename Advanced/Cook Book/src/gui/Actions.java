@@ -133,8 +133,6 @@ public class Actions {
 	public static class CancelEdit implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if (CookBook.getInstance().getCurrentRecipe() == null)
-				CookBook.getInstance().setCurrentRecipe(0);
 			GUI.frame.showRecipePanel();
 		}
 	}
