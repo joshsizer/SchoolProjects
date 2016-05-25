@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
+import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -99,15 +101,19 @@ public class Actions {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			if (CookBook.getInstance().getCurrentRecipe() == null) {
+				return;
+			}
 			GUI.frame.showEditPanel();
 		}
 	}
 	
 	public static class NewCookBook implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
+			CookBook.newCookBook();
+			changeListValues(CookBook.getInstance().getRecipesAsArray());
+			GUI.frame.showRecipePanel();
 		}
 	}
 	
@@ -118,7 +124,7 @@ public class Actions {
 			JList<Recipe> source = (JList<Recipe>) arg0.getSource();
 			Recipe recipe = (Recipe) source.getSelectedValue();
 			CookBook.getInstance().setCurrentRecipe(recipe);
-			GUI.frame.repaint();
+			GUI.frame.showRecipePanel();
 		}
 		
 	}
@@ -149,15 +155,54 @@ public class Actions {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Recipe currentRecipe = CookBook.getInstance().getCurrentRecipe();
-			if (currentRecipe == null) {
-				String ingredients = GUI.frame.editPanel.ingredientsTextArea
-						.getText();
-				String steps = GUI.frame.editPanel.stepsTextArea.getText();
+			
+			ArrayList<String> ingredients = parse(GUI.frame.editPanel.ingredientsTextArea.getText());
+			ArrayList<String> steps = parse(GUI.frame.editPanel.stepsTextArea.getText());
+			
+			String name = GUI.frame.editPanel.nameTextField.getText();
+			
+			ListModel<Integer> categoriesLM = GUI.frame.editPanel.categoryList.getModel();
+			ArrayList<Integer> categories = new ArrayList<Integer>();
+			
+			for (int i = 0; i < categoriesLM.getSize(); i++) {
+				categories.add(categoriesLM.getElementAt(i));
 			}
+			
+			if (currentRecipe == null) {
+				Recipe newRecipe = new Recipe(name, categories, ingredients, steps);
+				CookBook.getInstance().addRecipe(newRecipe);
+				CookBook.getInstance().setCurrentRecipe(newRecipe);
+				changeListValues(CookBook.getInstance().getRecipesAsArray());
+			} else {
+				CookBook.getInstance().getCurrentRecipe().save(name, categories, ingredients, steps);
+			}
+			
+			GUI.frame.showRecipePanel();
+		}
+		public static ArrayList<String> parse(String raw) {
+			ArrayList<String> steps = new ArrayList<String>();
+			Scanner lineSeparator = new Scanner(raw);
+			while (lineSeparator.hasNextLine()) {
+				String line = lineSeparator.nextLine();
+				if (!line.equals(""))
+					steps.add(line);
+			}
+			lineSeparator.close();
+			return steps;
 		}
 	}
 	
-	private static void changeListValues(Recipe[] recipes) {
+	public static class RemoveRecipe implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			CookBook.getInstance().removeRecipe(CookBook.getInstance().getCurrentRecipe());
+			changeListValues(CookBook.getInstance().getRecipesAsArray());
+		}
+		
+	}
+	
+	public static void changeListValues(Recipe[] recipes) {
 		if (recipes == null) {
 			recipes = new Recipe[0];
 		}
@@ -169,5 +214,10 @@ public class Actions {
 			CookBook.getInstance().setCurrentRecipe(0);
 		}
 		GUI.frame.repaint();
+	}
+
+	public void parseSteps() {
+		// TODO Auto-generated method stub
+		
 	}
 }

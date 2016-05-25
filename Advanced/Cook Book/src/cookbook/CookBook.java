@@ -49,6 +49,10 @@ public class CookBook implements Serializable {
 		in.close();
 		fileIn.close();
 	}
+	
+	public static void newCookBook() {
+		instance = new CookBook();
+	}
 
 	/**
 	 * The file location to save to

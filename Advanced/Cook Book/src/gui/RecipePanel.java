@@ -50,6 +50,7 @@ public class RecipePanel extends JPanel {
 		recipeDisplayScrollPane.setVerticalScrollBarPolicy(
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+		recipeDisplayTextArea.setEditable(false);
 		recipeDisplayTextArea.setColumns(20);
 		recipeDisplayTextArea.setLineWrap(true);
 		recipeDisplayTextArea.setRows(5);

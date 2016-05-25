@@ -55,11 +55,13 @@ public class MenuBar extends JMenuBar {
 			categories[i] = item;
 		}
 
+		neww.addActionListener(new Actions.NewCookBook());
 		load.addActionListener(new Actions.LoadCookBook());
 		save.addActionListener(new Actions.SaveCookBook(false));
 		saveAs.addActionListener(new Actions.SaveCookBook(true));
 		
 		add.addActionListener(new Actions.AddRecipe());
+		remove.addActionListener(new Actions.RemoveRecipe());
 
 		file.add(neww);
 		file.add(load);

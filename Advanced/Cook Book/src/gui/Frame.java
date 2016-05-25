@@ -48,7 +48,7 @@ public class Frame extends JFrame {
 			
 			steps = currentRecipe.getSteps();
 			for (int i = 0; i < steps.size(); i++) {
-				stepsOutput += (i + 1) + ") " + steps.get(i) + "\n";
+				stepsOutput += steps.get(i) + "\n";
 			}
 			
 			cat = currentRecipe.getCatagories();

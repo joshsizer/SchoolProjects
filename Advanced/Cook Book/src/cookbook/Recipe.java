@@ -16,7 +16,7 @@ public class Recipe implements Serializable {
 	/**
 	 * The name of this recipe
 	 */
-	private final String name;
+	private String name;
 
 	/**
 	 * The categories to which this belong. A recipe has the potential to belong
@@ -190,5 +190,13 @@ public class Recipe implements Serializable {
 		}
 
 		return ret;
+	}
+
+	public void save(String name, ArrayList<Integer> categories, ArrayList<String> ingredients,
+			ArrayList<String> steps) {
+		this.name = name;
+		this.categories = categories;
+		this.ingredients = ingredients;
+		this.steps = steps;
 	}
 }
