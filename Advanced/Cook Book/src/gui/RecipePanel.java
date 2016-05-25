@@ -19,8 +19,11 @@ import cookbook.CookBook;
 import cookbook.Recipe;
 
 /**
- *
- * @author Josh
+ * The recipe panel. From this panel, you can choose what recipe to view, and
+ * you can see the steps, ingredients, name, and category of the currently
+ * selected recipe. The GUI code is taken from netbeans.
+ * 
+ * @author Josh Sizer
  */
 @SuppressWarnings("serial")
 public class RecipePanel extends JPanel {

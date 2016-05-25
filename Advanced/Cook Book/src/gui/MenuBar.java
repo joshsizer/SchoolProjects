@@ -6,6 +6,13 @@ import javax.swing.JMenuItem;
 
 import cookbook.Category;
 
+/**
+ * The menu bar for this program that houses much of the options, such as 
+ * saving, loading, sorting, and adding new recipes, for this program.
+ * 
+ * @author joshs
+ *
+ */
 @SuppressWarnings("serial")
 public class MenuBar extends JMenuBar {
 	/**

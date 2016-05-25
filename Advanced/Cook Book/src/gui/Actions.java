@@ -4,15 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
@@ -23,6 +20,15 @@ import cookbook.Category;
 import cookbook.CookBook;
 import cookbook.Recipe;
 
+/**
+ * All of the actions that components in this program uses.
+ * 
+ * The functionality of the program and the GUI are separated, and
+ * these classes are what link the two.
+ * 
+ * @author Josh Sizer
+ *
+ */
 public class Actions {
 	static JFileChooser fileChooser = new JFileChooser();
 	static FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -32,6 +38,10 @@ public class Actions {
 		fileChooser.setFileFilter(filter);
 	}
 
+	/**
+	 * Brings up the save dialogue if the cook book has not been
+	 * saved since the last change. 
+	 */
 	public static class CloseWindow extends WindowAdapter {
 		@Override
 		public void windowClosing(WindowEvent e) {
@@ -52,14 +62,10 @@ public class Actions {
 				return;
 			}
 		}
-
-		public static void showSaveWindow() {
-
-		}
 	}
 
 	/**
-	 * A class that handles a save event
+	 * Handles when the user wants to save the cook book.
 	 * 
 	 */
 	public static class SaveCookBook implements ActionListener {
@@ -92,6 +98,10 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Loads a cook book from a file chosen by the user.
+	 *
+	 */
 	public static class LoadCookBook implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent loadPressed) {
@@ -115,6 +125,10 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Shows only the recipes with the given categories
+	 *
+	 */
 	public static class SortByCategory implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent menuPressed) {
@@ -128,6 +142,11 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Populates the edit panel and shows it, unless no recipe
+	 * is selected.
+	 * 	
+	 */
 	public static class EditRecipe implements ActionListener {
 
 		@Override
@@ -139,6 +158,11 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Creates a new cook book. If the current cook book
+	 * has not been saved, it will show a save dialogue.
+	 *
+	 */
 	public static class NewCookBook implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -163,6 +187,10 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Populates the recipe panel when a recipe is selected or changed.
+	 *
+	 */
 	public static class RecipeSelected implements ListSelectionListener {
 		@Override
 		public void valueChanged(ListSelectionEvent arg0) {
@@ -175,6 +203,10 @@ public class Actions {
 
 	}
 
+	/**
+	 * Show all recipes contained within this cook book
+	 *
+	 */
 	public static class ShowAllRecipes implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -182,6 +214,10 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Cancels the current edit and brings the user to the recipe panel
+	 *
+	 */
 	public static class CancelEdit implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -189,6 +225,10 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Brings up an empty edit panel
+	 *
+	 */
 	public static class AddRecipe implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -197,6 +237,10 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Edits the current recipe or saves a new one.
+	 *
+	 */
 	public static class SaveRecipe implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -244,6 +288,10 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Removes the selected recipe from the cook book.
+	 *
+	 */
 	public static class RemoveRecipe implements ActionListener {
 
 		@Override
@@ -255,6 +303,10 @@ public class Actions {
 
 	}
 
+	/**
+	 * Adds the selected category to the current recipe bring edited
+	 *
+	 */
 	public static class AddCategory implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -279,6 +331,10 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Removes the selected category from the current recipe bring edited
+	 *
+	 */
 	public static class RemoveCategory implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -305,6 +361,11 @@ public class Actions {
 		}
 	}
 
+	/**
+	 * Changes the recipe list values.
+	 * 
+	 * @param recipes The new recipes to show
+	 */
 	public static void changeListValues(Recipe[] recipes) {
 		if (recipes == null) {
 			recipes = new Recipe[0];
@@ -317,10 +378,5 @@ public class Actions {
 			CookBook.getInstance().setCurrentRecipe(0);
 		}
 		GUI.frame.repaint();
-	}
-
-	public void parseSteps() {
-		// TODO Auto-generated method stub
-
 	}
 }

@@ -9,6 +9,13 @@ import javax.swing.JFrame;
 import cookbook.CookBook;
 import cookbook.Recipe;
 
+/**
+ * The main frame for this program. This component houses the recipe panel
+ * and the edit panel, and there are methods to switch between them.
+ * 
+ * @author Josh Sizer
+ *
+ */
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
 	/**

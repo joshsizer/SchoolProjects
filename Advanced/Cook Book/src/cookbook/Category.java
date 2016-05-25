@@ -1,5 +1,13 @@
 package cookbook;
 
+/**
+ * An enumeration for a category. A standard enum was
+ * not used in order to have a toString method to access the 
+ * categories associated name.
+ * 
+ * @author Josh Sizer
+ *
+ */
 public class Category {
 	public static final int BREAKFAST = 0;
 	public static final int LUNCH = 1;

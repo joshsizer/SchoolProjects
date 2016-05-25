@@ -9,6 +9,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The representation of a cook book.
+ * A cook book has numerous recipes, or none at all. 
+ * 
+ * @author Josh Sizer
+ *
+ */
 public class CookBook implements Serializable {
 	private static final long serialVersionUID = -795614831645998443L;
 	public static final String extension = "ckb";
@@ -137,6 +144,11 @@ public class CookBook implements Serializable {
 		return qualifiedRecipes;
 	}
 	
+	/**
+	 * Returns all of the recipes as an array instead of an array list.
+	 * @param recipes
+	 * @return
+	 */
 	private Recipe[] getRecipesAsArray(ArrayList<Recipe> recipes) {
 		Recipe[] array = new Recipe[recipes.size()];
 		for (int i = 0; i < array.length; i++) {
@@ -156,6 +168,13 @@ public class CookBook implements Serializable {
 		return getRecipesAsArray(this.recipes);
 	}
 	
+	/**
+	 * Returns all the recipes that contain the specified category, as an
+	 * array.
+	 * 
+	 * @param category
+	 * @return
+	 */
 	public Recipe[] getRecipesAsArray(int category) {
 		return getRecipesAsArray(getRecipes(category));
 	}
@@ -203,11 +222,20 @@ public class CookBook implements Serializable {
 		return currentRecipe;
 	}
 
+	/**
+	 * Setst the current recipe based on the recipe's index in the recipe 
+	 * <code>ArrayList</code>
+	 * @param index
+	 */
 	public void setCurrentRecipe(int index) {
 		if (index < recipes.size())
 			setCurrentRecipe(recipes.get(index));
 	}
 	
+	/**
+	 * Sets the current recipe
+	 * @param recipe
+	 */
 	public void setCurrentRecipe(Recipe recipe) {
 			currentRecipe = recipe;
 	}
@@ -255,10 +283,18 @@ public class CookBook implements Serializable {
 		return saved;
 	}
 	
+	/**
+	 * Sets the save value for this cook book.
+	 * 
+	 * @param saved
+	 */
 	public void setSaveValue(boolean saved) {
 		this.saved = saved;
 	}
 	
+	/** 
+	 * Outputs all the recipes contained within this cook book
+	 */
 	@Override
 	public String toString() {
 		String ret = "";
