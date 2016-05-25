@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -23,9 +25,16 @@ public class Frame extends JFrame {
 		
 		setJMenuBar(menuBar);
 		super.getContentPane().add(recipePanel);
+		
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new Actions.CloseWindow());
 	}
 
-	public void showEditPanel() {
+	/**
+	 * Updates and shows the edit panel based on the currently
+	 * selected recipe.
+	 */
+	public void updateEditPanel() {
 		Recipe currentRecipe = CookBook.getInstance().getCurrentRecipe();
 		
 		String name = "";
@@ -62,6 +71,8 @@ public class Frame extends JFrame {
 		editPanel.ingredientsTextArea.setText(ingredientsOutput);
 		editPanel.stepsTextArea.setText(stepsOutput);
 		editPanel.categoryList.setListData(categories);
+		//editPanel.categorySelection.setSelectedIndex(0);
+		
 		
 		if (getContentPane().getComponent(0) == editPanel)
 			return;
@@ -73,7 +84,10 @@ public class Frame extends JFrame {
 		repaint();
 	}
 	
-	public void showRecipePanel() {		
+	/**
+	 * Updates and shows the currently selected recipe.
+	 */
+	public void updateRecipePanel() {		
 		Recipe cur = CookBook.getInstance().getCurrentRecipe();
 
 		if (cur == null) {

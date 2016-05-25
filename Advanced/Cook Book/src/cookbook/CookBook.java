@@ -48,8 +48,13 @@ public class CookBook implements Serializable {
 		instance = (CookBook) in.readObject();
 		in.close();
 		fileIn.close();
+		instance.saved = true;
 	}
 	
+	/**
+	 * Sets the global cook book object to be a new cook book
+	 * with no recipes. 
+	 */
 	public static void newCookBook() {
 		instance = new CookBook();
 	}
@@ -79,19 +84,7 @@ public class CookBook implements Serializable {
 	 * Creates a blank cook book (no recipes).
 	 */
 	public CookBook() {
-		this(new ArrayList<Recipe>());
-	}
-
-	/**
-	 * Creates a cook book with the specified recipes
-	 * 
-	 * @param recipes
-	 *            An <code>ArrayList</code> of recipes
-	 */
-	public CookBook(ArrayList<Recipe> recipes) {
-		this.recipes = recipes;
-		setCurrentRecipe(0);
-		saved = false;
+		recipes = new ArrayList<Recipe>();
 	}
 
 	/**
@@ -260,6 +253,10 @@ public class CookBook implements Serializable {
 	 */
 	public boolean getSaveValue() {
 		return saved;
+	}
+	
+	public void setSaveValue(boolean saved) {
+		this.saved = saved;
 	}
 	
 	@Override

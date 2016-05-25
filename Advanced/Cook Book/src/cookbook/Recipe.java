@@ -34,6 +34,7 @@ public class Recipe implements Serializable {
 	 */
 	private ArrayList<String> steps;
 
+
 	/**
 	 * Initializes this recipe to have the specified ingredients and steps
 	 * 
@@ -127,6 +128,24 @@ public class Recipe implements Serializable {
 	}
 
 	/**
+	 * Updates this recipe to have the new information
+	 * 
+	 * @param name
+	 * @param categories
+	 * @param ingredients
+	 * @param steps
+	 */
+	public void update(String name, ArrayList<Integer> categories, ArrayList<String> ingredients,
+			ArrayList<String> steps) {
+		this.name = name;
+		this.categories = categories;
+		this.ingredients = ingredients;
+		this.steps = steps;
+		CookBook.getInstance().setSaveValue(false);
+	}
+	
+	
+	/**
 	 * Returns true if the two recipes have: the same name, the same categories,
 	 * the same ingredients, and the same steps.
 	 */
@@ -190,13 +209,5 @@ public class Recipe implements Serializable {
 		}
 
 		return ret;
-	}
-
-	public void save(String name, ArrayList<Integer> categories, ArrayList<String> ingredients,
-			ArrayList<String> steps) {
-		this.name = name;
-		this.categories = categories;
-		this.ingredients = ingredients;
-		this.steps = steps;
 	}
 }

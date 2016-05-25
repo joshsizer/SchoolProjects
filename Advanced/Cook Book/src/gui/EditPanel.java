@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 
@@ -89,6 +90,7 @@ public class EditPanel extends JPanel {
 		categoryListScrollPane.setViewportView(categoryList);
 
 		addCategory.setText("Add");
+		addCategory.addActionListener(new Actions.AddCategory());
 
 		Integer[] allCategories = new Integer[Category.numberOfCategories];
 		for (int i = 0; i < allCategories.length; i++) {
@@ -99,6 +101,7 @@ public class EditPanel extends JPanel {
 		
 
 		remove.setText("Remove");
+		remove.addActionListener(new Actions.RemoveCategory());
 
 		nameLabel.setText("Name:");
 
