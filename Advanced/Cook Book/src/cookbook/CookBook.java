@@ -257,7 +257,8 @@ public class CookBook implements Serializable {
 		out.close();
 		fileOut.close();
 		System.out.printf(
-				"Serialized data saved in " + saveLocation.getAbsolutePath());
+				"Serialized data saved in " + saveLocation.getAbsolutePath() 
+				+ "\n");
 		saved = true;
 	}
 

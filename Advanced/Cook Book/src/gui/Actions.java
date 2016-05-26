@@ -57,6 +57,7 @@ public class Actions {
 			if (selection == 0) {
 				SaveCookBook save = new SaveCookBook(false);
 				save.actionPerformed(null);
+				e.getWindow().dispose();
 			} else if (selection == 1) {
 				e.getWindow().dispose();
 				return;
@@ -80,16 +81,17 @@ public class Actions {
 			boolean i_saveAs = saveAs || CookBook.getInstance()
 					.getSaveLocation() == null;
 
-			int option = -1;
 			if (i_saveAs) {
+				int option = -1;
+
 				option = fileChooser.showSaveDialog(null);
-			}
-			if (option == JFileChooser.APPROVE_OPTION) {
+				if (option == JFileChooser.CANCEL_OPTION) 
+					return;
+				
 				CookBook.getInstance().setSaveLocation(fileChooser
 						.getSelectedFile());
-			} else
-				return;
-
+			}
+	
 			try {
 				CookBook.getInstance().save();
 			} catch (IOException e) {
