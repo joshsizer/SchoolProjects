@@ -6,7 +6,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
 import cookbook.Category;
-import cookbook.Recipe;
 
 /**
  * Instead of displaying the integer value of the category in the category JList

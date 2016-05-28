@@ -55,12 +55,12 @@ public class RecipePanel extends JPanel {
 
 		recipeDisplayTextArea.setEditable(false);
 		recipeDisplayTextArea.setColumns(20);
-		recipeDisplayTextArea.setLineWrap(true);
+		recipeDisplayTextArea.setLineWrap(false);
 		recipeDisplayTextArea.setRows(5);
 		recipeDisplayScrollPane.setViewportView(recipeDisplayTextArea);
 
 		recipeListScrollPane.setHorizontalScrollBarPolicy(
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 		recipeList = new JList<Recipe>(
 				CookBook.getInstance().getRecipesAsArray());

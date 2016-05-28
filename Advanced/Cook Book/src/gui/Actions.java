@@ -374,11 +374,12 @@ public class Actions {
 		}
 		GUI.frame.recipePanel.recipeList.setListData(recipes);
 		if (recipes.length == 0) {
+			System.out.println("No recipes to show");
 			CookBook.getInstance().setCurrentRecipe(null);
 		} else {
 			GUI.frame.recipePanel.recipeList.setSelectedIndex(0);
 			CookBook.getInstance().setCurrentRecipe(0);
 		}
-		GUI.frame.repaint();
+		GUI.frame.updateRecipePanel();
 	}
 }

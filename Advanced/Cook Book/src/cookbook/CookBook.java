@@ -92,6 +92,7 @@ public class CookBook implements Serializable {
 	 */
 	public CookBook() {
 		recipes = new ArrayList<Recipe>();
+		saved = true;
 	}
 
 	/**

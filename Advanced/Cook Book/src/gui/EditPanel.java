@@ -1,6 +1,5 @@
 package gui;
 
-import javax.swing.DefaultButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -69,12 +68,12 @@ public class EditPanel extends JPanel {
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		stepsTextArea.setColumns(20);
-		stepsTextArea.setLineWrap(true);
+		stepsTextArea.setLineWrap(false);
 		stepsTextArea.setRows(5);
 		stepsScrollPane.setViewportView(stepsTextArea);
 
 		ingredientsScrollPane.setHorizontalScrollBarPolicy(
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 		ingredientsTextArea.setColumns(20);
 		ingredientsTextArea.setRows(5);

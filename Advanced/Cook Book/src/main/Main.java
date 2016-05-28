@@ -1,14 +1,10 @@
 package main;
 
-import java.util.ArrayList;
-
-import cookbook.Category;
-import cookbook.CookBook;
-import cookbook.Recipe;
 import gui.GUI;
 
 public class Main {	
 	public static void main(String[] args) {
+		/*
 		ArrayList<String> testIngredients = new ArrayList<String>();
 		ArrayList<String> testSteps = new ArrayList<String>();
 		
@@ -36,14 +32,12 @@ public class Main {
 		categories.add(Category.BREAKFAST);
 		categories.add(Category.VEGETARIAN);
 		
-		categories2.add(Category.BREAKFAST);
-		
-		//System.out.println(cookies);
-		//System.out.println(cookies2);
+		categories2.add(Category.BREAKFAST); 
 		
 		CookBook.getInstance().addRecipe(cookies);
 		CookBook.getInstance().addRecipe(cookies2);
-	
+		*/
+		
 		GUI.display();
 	}
 }

@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -97,13 +95,10 @@ public class Frame extends JFrame {
 	public void updateRecipePanel() {		
 		Recipe cur = CookBook.getInstance().getCurrentRecipe();
 
-		if (cur == null) {
+		if (cur == null && recipePanel.recipeList.getModel().getSize() != 0) {
 			CookBook.getInstance().setCurrentRecipe(0);
 			cur = CookBook.getInstance().getCurrentRecipe();
-		} else {
-			
-		}
-		
+		} 
 		String recipeString = "";
 		String nameString = "Name: ";
 
