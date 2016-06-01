@@ -1,0 +1,8 @@
+
+public class FactorialCalculator {
+	public static int calculate(int maxNumber) {
+		for (int i = 0; i < maxNumber; i++) {
+			
+		}
+	}
+}

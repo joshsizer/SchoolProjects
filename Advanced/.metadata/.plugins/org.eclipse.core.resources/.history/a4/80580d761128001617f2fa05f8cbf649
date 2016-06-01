@@ -1,0 +1,34 @@
+package main;
+
+public class PalindromeCalculator {
+	/**
+	 * Will calculate from 0 to one less than the max number
+	 * @param maxNumber
+	 */
+	public static void calculate(int maxNumber) {
+		for (int i = 0; i < maxNumber; i++) {
+			String dec = Integer.toString(i);
+			String bin = Integer.toBinaryString(i);
+			
+			boolean isDecPal = false;
+			boolean isBinPal = false;
+		}
+	}
+	
+	public boolean isPalindrome(String input) {
+		int middle = (input.length() % 2 == 0 ? (input.length() / 2) + 1 : input.length() / 2);
+		
+		String firstHalf = input.substring(0, middle);
+		String secondHalf = input.substring(middle);
+		
+		boolean isPalindrome = true;
+		
+		for (int i = 0; i < firstHalf.length(); i++) {
+			if (secondHalf.charAt(secondHalf.length() - (1 + i)) 
+					!= firstHalf.charAt(i)) {
+				return false;
+			} 
+		}
+		return true;
+	}
+}
