@@ -1,3 +1,0 @@
-INDEX VERSION 1.127+C:\Users\18jsizer\Desktop\GitHub\SchoolProjects\Advanced\.metadata\.plugins\org.eclipse.jdt.core
-3916340728.index
-988396775.index
