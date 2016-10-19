@@ -10,14 +10,27 @@ import java.util.Scanner;
 
 public class Parser {
 	
+	/**
+	 * Parses the file for all earth quakes.
+	 * @param path The path to the file containing earth quake information
+	 * @return An array list of all the earth quakes
+	 * @throws FileNotFoundException If the file cannot be found.
+	 */
 	public static List<EarthQuake> getEarthQuakes(String path) throws FileNotFoundException {
 		List<EarthQuake> earthQuakes = new ArrayList<EarthQuake>();
+		
 		String fileContents = readFile(path);
 		Scanner scanner = new Scanner(fileContents);
+		
 		while (scanner.hasNextLine()) {
 			String currentLine = scanner.nextLine();
+			
 			String[] tokens = currentLine.split(",");
+			if (tokens.length == 5)
+				earthQuakes.add(new EarthQuake(tokens));
 		}
+		
+		scanner.close();
 		
 		return earthQuakes;
 	}
