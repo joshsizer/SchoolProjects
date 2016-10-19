@@ -1,0 +1,21 @@
+
+public class FactorialCalculator {
+	public static int calculate(int maxNumber) {
+		for (int i = 0; i < maxNumber; i++) {
+			
+		}
+	}
+	
+	public static int factorial(int input) {
+		int product = 1;
+		for (int i = input; i > 0; i--) {
+			product *= i;
+		}
+		
+		return product;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(factorial(1));
+	}
+}

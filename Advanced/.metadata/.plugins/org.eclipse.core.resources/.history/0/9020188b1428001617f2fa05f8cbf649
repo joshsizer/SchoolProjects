@@ -1,0 +1,32 @@
+
+public class FactorialCalculator {
+	public static int calculate(int maxNumber) {
+		int total = ;
+		for (int i = 2; i < maxNumber; i++) {
+			String current = Integer.toString(i);
+			
+			int sum = 0;
+			for (int k = 0; k < current.length(); k++) {
+				int blah = Integer.parseInt(current.substring(i, i + 1));
+				sum += factorial(blah);
+			}
+			
+			if (sum == i)
+				total += i;
+		}
+		return total;
+	}
+		
+	public static int factorial(int input) {
+		int product = 1;
+		for (int i = input; i > 0; i--) {
+			product *= i;
+		}
+		
+		return product;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(factorial(1));
+	}
+}
