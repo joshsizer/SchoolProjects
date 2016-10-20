@@ -13,19 +13,31 @@ import java.util.Arrays;
  *
  */
 public class DataCenter {
-	public static final int SORT_BY_LAT = 0;
-	public static final int SORT_BY_LONG = 1;
-	public static final int SORT_BY_DEPTH = 2;
-	public static final int SORT_BY_MAG = 3;
+	public static final int SORT_BY_DATE = 0;
+	public static final int SORT_BY_LAT = 1;
+	public static final int SORT_BY_LONG = 2;
+	public static final int SORT_BY_DEPTH = 3;
+	public static final int SORT_BY_MAG = 4;
+	
+	public static final int SEARCH_BY_DATE = 0;
+	public static final int SEARCH_BY_LAT = 1;
+	public static final int SEARCH_BY_LONG = 2;
+	public static final int SEARCH_BY_DEPTH = 3;
+	public static final int SEARCH_BY_MAG = 4;
 	
 	private EarthQuake[] allQuakes;
 	
 	public DataCenter(String path) throws IOException {
 		allQuakes = Parser.getEarthQuakes(path).toArray(new EarthQuake[]{});
 		sortByLat();
-		System.out.println(System.getProperty("user.home"));
-		
-		Parser.toFile(System.getProperty("user.home") + "\\Desktop\\toFile.txt", allQuakes);
+		print(allQuakes);
+		int index = searchLat(44.7832);
+		System.out.println(index);
+		System.out.println(allQuakes[index]);
+	}
+	
+	public void sortByDate() {
+		Arrays.sort(allQuakes, EarthQuake.getComparator(SORT_BY_DATE));
 	}
 
 	public void sortByLat() {
@@ -42,6 +54,10 @@ public class DataCenter {
 	
 	public void sortByMag() {
 		Arrays.sort(allQuakes, EarthQuake.getComparator(SORT_BY_MAG));
+	}
+	
+	public int searchLat(double lat) {
+		return BinarySearch.search(Arrays.asList(allQuakes), lat, EarthQuake.getSortator(SEARCH_BY_LAT));
 	}
 	
 	public void print(EarthQuake[] arr) {

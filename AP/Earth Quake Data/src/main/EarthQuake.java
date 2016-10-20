@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class EarthQuake {
 	private String date;
@@ -50,54 +51,71 @@ public class EarthQuake {
 
 	public static Comparator<EarthQuake> getComparator(int sortBy) {
 		switch(sortBy) {
-			case DataCenter.SORT_BY_LAT:
-				return new Comparator<EarthQuake>() {
-					@Override
-					public int compare(EarthQuake first, EarthQuake second) {
-						if (first.getLat() > second.getLat()) 
-							return 1;
-						else
-							return -1;
-					}
-				};
-			case DataCenter.SORT_BY_LONG:
-				return new Comparator<EarthQuake>() {
-					@Override
-					public int compare(EarthQuake first, EarthQuake second) {
-						if (first.getLong() > second.getLong()) 
-							return 1;
-						else
-							return -1;
-					}
-				};
-			case DataCenter.SORT_BY_DEPTH:
-				return new Comparator<EarthQuake>() {
-					@Override
-					public int compare(EarthQuake first, EarthQuake second) {
-						if (first.getDepth() > second.getDepth()) 
-							return 1;
-						else
-							return -1;
-					}
-				};
-			case DataCenter.SORT_BY_MAG:
-				return new Comparator<EarthQuake>() {
-					@Override
-					public int compare(EarthQuake first, EarthQuake second) {
-						if (first.getMag() > second.getMag()) 
-							return 1;
-						else
-							return -1;
-					}
-				};
-			default: 
-				return new Comparator<EarthQuake>() {
-					@Override
-					public int compare(EarthQuake first, EarthQuake second) {
-						return first.getDate().compareTo(second.getDate());
-					}
-				};  
+		case DataCenter.SORT_BY_LAT:
+			return new Comparator<EarthQuake>() {
+				@Override
+				public int compare(EarthQuake first, EarthQuake second) {
+					return Double.compare(first.getLat(), second.getLat()); }};
+					
+		case DataCenter.SORT_BY_LONG:
+			return new Comparator<EarthQuake>() {
+				@Override
+				public int compare(EarthQuake first, EarthQuake second) {
+					return Double.compare(first.getLong(), second.getLong()); }};
+					
+		case DataCenter.SORT_BY_DEPTH:
+			return new Comparator<EarthQuake>() {
+				@Override
+				public int compare(EarthQuake first, EarthQuake second) {
+					return Double.compare(first.getDepth(), second.getDepth()); }};
+					
+		case DataCenter.SORT_BY_MAG:
+			return new Comparator<EarthQuake>() {
+				@Override
+				public int compare(EarthQuake first, EarthQuake second) {
+					return Double.compare(first.getMag(), second.getMag()); }};
+					
+		default: 
+			return new Comparator<EarthQuake>() {
+				@Override
+				public int compare(EarthQuake first, EarthQuake second) {
+					return first.getDate().compareTo(second.getDate()); }};  
 		}
+	}
 	
+	public static Sortator<EarthQuake> getSortator(int searchBy) {
+		switch (searchBy) {
+		/*
+		case DataCenter.SEARCH_BY_DATE:
+			return new Sortator<EarthQuake>() {
+				@Override
+				public double get(List<EarthQuake> list, int index) {
+					return list.get(index).getDate(); }};
+			*/
+		case DataCenter.SORT_BY_LAT:
+			return new Sortator<EarthQuake>() {
+				@Override
+				public double get(List<EarthQuake> list, int index) {
+					return list.get(index).getLat(); }};
+					
+		case DataCenter.SORT_BY_LONG:
+			return new Sortator<EarthQuake>() {
+				@Override
+				public double get(List<EarthQuake> list, int index) {
+					return list.get(index).getLong(); }};
+					
+		case DataCenter.SORT_BY_DEPTH:
+			return new Sortator<EarthQuake>() {
+				@Override
+				public double get(List<EarthQuake> list, int index) {
+					return list.get(index).getDepth(); }};
+				
+		default:
+			return new Sortator<EarthQuake>() {
+				@Override
+				public double get(List<EarthQuake> list, int index) {
+					return list.get(index).getMag(); }};
+			
+		}
 	}
 }
