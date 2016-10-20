@@ -1,8 +1,11 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,5 +55,17 @@ public class Parser {
 			
 		scanner.close();
 		return fileContents.toString();
+	}
+	
+	public static void toFile(String path, EarthQuake[] arr) throws IOException {
+		BufferedWriter fileWriter = new BufferedWriter(new FileWriter(path));
+		
+		StringBuilder output = new StringBuilder();
+		for (EarthQuake cur : arr) {
+			output.append(cur.toString() + "\n");
+		}
+		
+		fileWriter.write(output.toString());
+		fileWriter.close();
 	}
 }

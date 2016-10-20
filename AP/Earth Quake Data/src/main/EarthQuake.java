@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class EarthQuake {
 	private String date;
@@ -45,5 +46,58 @@ public class EarthQuake {
 	@Override
 	public String toString() {
 		return date + "," + lat + "," + longi + "," + depth + "," + mag;
+	}
+
+	public static Comparator<EarthQuake> getComparator(int sortBy) {
+		switch(sortBy) {
+			case DataCenter.SORT_BY_LAT:
+				return new Comparator<EarthQuake>() {
+					@Override
+					public int compare(EarthQuake first, EarthQuake second) {
+						if (first.getLat() > second.getLat()) 
+							return 1;
+						else
+							return -1;
+					}
+				};
+			case DataCenter.SORT_BY_LONG:
+				return new Comparator<EarthQuake>() {
+					@Override
+					public int compare(EarthQuake first, EarthQuake second) {
+						if (first.getLong() > second.getLong()) 
+							return 1;
+						else
+							return -1;
+					}
+				};
+			case DataCenter.SORT_BY_DEPTH:
+				return new Comparator<EarthQuake>() {
+					@Override
+					public int compare(EarthQuake first, EarthQuake second) {
+						if (first.getDepth() > second.getDepth()) 
+							return 1;
+						else
+							return -1;
+					}
+				};
+			case DataCenter.SORT_BY_MAG:
+				return new Comparator<EarthQuake>() {
+					@Override
+					public int compare(EarthQuake first, EarthQuake second) {
+						if (first.getMag() > second.getMag()) 
+							return 1;
+						else
+							return -1;
+					}
+				};
+			default: 
+				return new Comparator<EarthQuake>() {
+					@Override
+					public int compare(EarthQuake first, EarthQuake second) {
+						return first.getDate().compareTo(second.getDate());
+					}
+				};  
+		}
+	
 	}
 }
