@@ -21,7 +21,8 @@ public class BinarySearch {
 	 *            The SORTED list which (hopefully) contains your target
 	 * @param target
 	 *            Your target integer
-	 * @param order The order of the data, either low to high or high to low
+	 * @param order
+	 *            The order of the data, either low to high or high to low
 	 * 
 	 * @return The index of your target if it exists in the list, or -1 if it
 	 *         does not.
@@ -30,10 +31,8 @@ public class BinarySearch {
 		if (order == DataProcessing.LOW_TO_HIGH) {
 			int low = 0, high = list.size() - 1, middle = (low + high) / 2;
 			lastNumComparisons = 0;
-			
-	
+
 			while (comparator.compare(list.get(middle), target) != 0 && low <= high) {
-				lastNumComparisons++;
 				if (comparator.compare(list.get(middle), target) > 0)
 					high = middle - 1;
 				else
@@ -41,7 +40,7 @@ public class BinarySearch {
 				lastNumComparisons++;
 				middle = (low + high) / 2;
 			}
-	
+
 			lastNumComparisons++;
 			if (comparator.compare(list.get(middle), target) == 0)
 				return middle;
@@ -50,9 +49,8 @@ public class BinarySearch {
 		} else {
 			int low = 0, high = list.size() - 1, middle = (low + high) / 2;
 			lastNumComparisons = 0;
-			
+
 			while (comparator.compare(list.get(middle), target) != 0 && low <= high) {
-				lastNumComparisons++;
 				if (comparator.compare(list.get(middle), target) < 0)
 					high = middle - 1;
 				else
@@ -60,7 +58,7 @@ public class BinarySearch {
 				lastNumComparisons++;
 				middle = (low + high) / 2;
 			}
-	
+
 			lastNumComparisons++;
 			if (comparator.compare(list.get(middle), target) == 0)
 				return middle;

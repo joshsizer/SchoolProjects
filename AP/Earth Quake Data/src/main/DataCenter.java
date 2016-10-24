@@ -15,15 +15,16 @@ public class DataCenter {
 	public DataCenter(String path) throws IOException {
 		allQuakes = Parser.getEarthQuakes(path).toArray(new EarthQuake[]{});
 		
-		DataProcessing.sortByLong(DataProcessing.HIGH_TO_LOW);
+		DataProcessing.sortByMag();
+		DataProcessing.sortByLat();
+		DataProcessing.sortByDate();
 		print(allQuakes);
 				
-		System.out.println("EarthQuake found: " + allQuakes[DataProcessing.searchLong(-179.974, DataProcessing.BINARY_SEARCH, DataProcessing.HIGH_TO_LOW)]);
+		System.out.println("EarthQuake found: " + allQuakes[DataProcessing.searchDate("20001014", DataProcessing.BINARY_SEARCH, DataProcessing.LOW_TO_HIGH)]);
 		System.out.println("Number of comparisons with BinarySearch: " + BinarySearch.lastNumComparisons);
-		DataProcessing.searchLong(-28.873, DataProcessing.LINEAR_SEARCH, DataProcessing.HIGH_TO_LOW);
+		DataProcessing.searchDate("20001014", DataProcessing.LINEAR_SEARCH, DataProcessing.HIGH_TO_LOW);
 		System.out.println("Number of comparisons with LinearSearch: " + LinearSearch.lastNumComparisons);
 				
-
 	}
 	
 	public void print(EarthQuake[] arr) {
