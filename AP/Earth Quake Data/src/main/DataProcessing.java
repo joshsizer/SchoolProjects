@@ -1,7 +1,11 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+
+
 
 public class DataProcessing {
 	public static final int SORT_BY_DATE = 0;
@@ -117,6 +121,23 @@ public class DataProcessing {
 					getSearcher(DataProcessing.SEARCH_BY_MAG), order);
 	}
 
+	
+	public static void removeDates(String date) {
+		int size = 0;
+		for (EarthQuake cur : DataCenter.allQuakes) {
+			if (cur.getDate().startsWith(date))
+				size++;
+		}
+		EarthQuake[] newArr = new EarthQuake[DataCenter.allQuakes.length - size];
+		int curNewArrIndex = 0;
+		for (int i = 0; i < DataCenter.allQuakes.length; i++) {
+			EarthQuake cur = DataCenter.allQuakes[i];
+			if (!(cur.getDate().startsWith(date))) {
+				newArr[curNewArrIndex++] = cur;
+			}
+		}
+		DataCenter.allQuakes = newArr;
+	}
 	/**
 	 * Returns a comparator that will sort an EarthQuake by a specific piece of
 	 * instance data

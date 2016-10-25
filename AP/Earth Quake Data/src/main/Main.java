@@ -6,7 +6,7 @@ public class Main {
 		try {
 			DataCenter dataCenter = new DataCenter("quak2000.txt");
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 

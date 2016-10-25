@@ -41,4 +41,20 @@ public class EarthQuake {
 	public String toString() {
 		return date + "," + lat + "," + longi + "," + depth + "," + mag;
 	}
+	
+	@Override
+	public boolean equals(Object arg) {
+		if (!(arg instanceof EarthQuake))
+			return false;
+		
+		EarthQuake compare = (EarthQuake)arg;
+		if (compare.getDate().equals(this.getDate())
+				&& compare.getLat() == this.getLat()
+				&& compare.getLong() == this.getLong()
+				&& compare.getDepth() == this.getDepth()
+				&& compare.getMag() == this.getMag())
+			return true;
+		else
+			return false;
+	}
 }
