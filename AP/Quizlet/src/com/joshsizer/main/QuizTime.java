@@ -7,6 +7,10 @@ public class QuizTime {
 		this.myQuizes = quizes;
 	}
 	
+	public void giveQuiz() {
+		giveQuiz(0);
+	}
+	
 	public void giveQuiz(String name) {
 		for (int i = 0; i < myQuizes.length; i++) {
 			if (myQuizes[i].getName().equals(name)) {
@@ -21,9 +25,5 @@ public class QuizTime {
 			return;
 		}
 		myQuizes[whichQuiz].giveQuiz();
-	}
-	
-	public void giveQuiz() {
-		giveQuiz(0);
 	}
 }
