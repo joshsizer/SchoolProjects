@@ -71,12 +71,9 @@ public class Parser {
 		return fileContents.toString();
 	}
 
-	public static void toFile(String path) throws IOException {
-		BufferedWriter fileWriter = new BufferedWriter(new FileWriter(path));
-
-		StringBuilder output = new StringBuilder();
-	
-		fileWriter.write(output.toString());
+	public static void toFile(String path, String data) throws IOException {
+		BufferedWriter fileWriter = new BufferedWriter(new FileWriter(path));	
+		fileWriter.write(data);
 		fileWriter.close();
 	}
 }

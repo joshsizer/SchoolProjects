@@ -1,6 +1,7 @@
 package com.joshsizer.main;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class QuizTime {
 	private Quiz[] myQuizes;
@@ -31,5 +32,26 @@ public class QuizTime {
 			return;
 		}
 		myQuizes[whichQuiz].giveQuiz();
+	}
+	
+	public void addQuiz(Quiz quiz) {
+		Quiz[] newArr = new Quiz[myQuizes.length + 1];
+		for (int i = 0; i < newArr.length - 1; i++)
+				newArr[i] = myQuizes[i];
+		newArr[newArr.length - 1] = quiz;	
+		
+		myQuizes = newArr;
+	}
+	
+	public void userAddQuiz() {
+		Quiz newQuiz = null;
+		
+		addQuiz(newQuiz);
+	}
+	
+	public void writeToFile(String path) throws IOException {
+		StringBuilder output = new StringBuilder();
+		
+		Parser.toFile(path, output.toString());
 	}
 }
