@@ -1,0 +1,53 @@
+quiz Test Quiz
+
+question 3
+q What is the capital of the United States?
+a Washington DC
+endQuestion
+
+question 3
+q What is the capital of Jamaica?
+a Kingston
+endQuestion
+
+question 10
+q An acceptable excuse
+a Extenuating
+endQuestion
+
+question 10
+q What is worse? Ignorance or apathy?
+a I don't know and I don't care
+endQuestion
+
+question 4
+q What is Kanye West's daughter's name?
+a North West
+endQuestion
+
+question 7
+q When does daylight savings start?
+a March 12
+endQuestion
+
+question 2
+q Why was six afraid of seven?
+a because seven eight nine
+endQuestion
+
+question 10
+q What is the best soda?
+a Mountain Dew
+endQuestion
+
+question 3
+q How many licks does it take to get to the center of a tootsie pop?
+a 3
+endQuestion
+
+question 10
+q When is Ramp Riot?
+a November 5
+endQuestion
+
+endQuiz

@@ -6,7 +6,10 @@ public class Quiz {
 	private boolean[] scoreTable;
 	private String name;
 	
-	public Quiz(String name, Question[] questions) {
+	public Quiz(String name, Question[] questions) throws Exception {
+		if (questions.length < 10) 
+			throw new Exception("A quiz must have at least 10 questions");
+		
 		myQuestions = questions;
 		this.name = name;
 		scoreTable = new boolean[myQuestions.length];
@@ -59,5 +62,14 @@ public class Quiz {
 		} else {
 			return "F";
 		}
+	}
+	
+	@Override
+	public String toString() {
+		String out = "";
+		for (Question q : myQuestions) {
+			out += q.toString() + "\n";
+		}
+		return out;
 	}
 }

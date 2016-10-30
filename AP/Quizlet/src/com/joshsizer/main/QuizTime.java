@@ -1,10 +1,16 @@
 package com.joshsizer.main;
 
+import java.io.FileNotFoundException;
+
 public class QuizTime {
 	private Quiz[] myQuizes;
 	
 	public QuizTime(Quiz[] quizes) {
 		this.myQuizes = quizes;
+	}
+	
+	public QuizTime(String path) throws FileNotFoundException {
+		this(Parser.getQuizes(path));
 	}
 	
 	public void giveQuiz() {
