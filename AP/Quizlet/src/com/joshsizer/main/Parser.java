@@ -10,7 +10,22 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
-
+	
+	public static void writeQuizesToFile(String path, QuizTime quizTime) throws IOException {
+		StringBuilder output = new StringBuilder();
+		
+		for (Quiz cur: quizTime.getQuizes()) {
+			output.append("quiz " + cur.getName() + "\n\n");
+			for (Question q : cur.getQuestions()) {
+				output.append("question " + q.getComplexity() + "\n");
+				output.append(q.getQuestion() + "\n");
+				output.append(q.getAnswer() + "\n");
+				output.append("endQuestion\n\n");
+			}
+			output.append("endQuiz");
+		}
+		toFile(path, output.toString());
+	}
 	public static Quiz[] getQuizes(String path) throws FileNotFoundException {
 		ArrayList<Quiz> allQuizes = new ArrayList<Quiz>();
 		ArrayList<Question> quizQuestions = new ArrayList<Question>();
@@ -38,17 +53,16 @@ public class Parser {
 				newQuestion.setComplexity(complexity);
 				quizQuestions.add(newQuestion);
 			} else if (line.startsWith("endQuiz")) {
-				try {
+				if (quizQuestions.size() < QuizTime.MIN_QUESTIONS && QuizTime.USE_MIN) {
+					System.out.println("Quiz " + quizName + " is invalid because it has less than 10 questions");
+				} else {
 					allQuizes.add(new Quiz(quizName, quizQuestions.toArray(new Question[]{})));
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
 				}
 			}
 		}
 		
 		scanner.close();
 		return allQuizes.toArray(new Quiz[]{});
-		
 	}
 	
 	/**
@@ -70,6 +84,7 @@ public class Parser {
 		scanner.close();
 		return fileContents.toString();
 	}
+	
 
 	public static void toFile(String path, String data) throws IOException {
 		BufferedWriter fileWriter = new BufferedWriter(new FileWriter(path));	

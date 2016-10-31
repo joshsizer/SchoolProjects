@@ -6,14 +6,15 @@ public class Quiz {
 	private boolean[] scoreTable;
 	private String name;
 	
-	public Quiz(String name, Question[] questions) throws Exception {
-		if (questions.length < 10) 
-			throw new Exception("A quiz must have at least 10 questions");
-		
+	public Quiz(String name, Question[] questions) {		
 		myQuestions = questions;
 		this.name = name;
 		scoreTable = new boolean[myQuestions.length];
 		yourAnswers = new String[myQuestions.length];
+	}
+	
+	public Quiz() {
+		this("", new Question[10]);
 	}
 	
 	public Question[] getQuestions() {
@@ -22,6 +23,17 @@ public class Quiz {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void addQuestion(Question question) {
+		Question[] newArr = new Question[myQuestions.length + 1];
+		for (int i = 0; i < newArr.length - 1; i++)
+				newArr[i] = myQuestions[i];
+		newArr[newArr.length - 1] = question;	
+		
+		myQuestions = newArr;
+		scoreTable = new boolean[myQuestions.length];
+		yourAnswers = new String[myQuestions.length];
 	}
 	
 	public void giveQuiz() {
@@ -36,7 +48,9 @@ public class Quiz {
 			System.out.println();
 		}
 		double percentage = (double)(correct) / (double)(myQuestions.length);
-		System.out.println("You recieved an " + toLetterGrade(percentage * 100) + " (" + (Double.toString(percentage * 100).substring(0, 4)) + "). Here's the breakdown: ");
+		System.out.println("You recieved an " + toLetterGrade(percentage * 100) + " (" + 
+				(Double.toString(percentage * 100).length() < 4 ? Double.toString(percentage * 100).substring(0, 3) : Double.toString(percentage * 100).substring(0, 4))
+				+ "). Here's the breakdown: ");
 		index = 0;
 		for (Question curQues : myQuestions) {
 			System.out.print((index + 1));
