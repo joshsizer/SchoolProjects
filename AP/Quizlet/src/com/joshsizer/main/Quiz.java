@@ -6,6 +6,11 @@ public class Quiz {
 	private boolean[] scoreTable;
 	private String name;
 	
+	/**
+	 * Creates a Quiz with the specified number of questions and name
+	 * @param name The name of the quiz
+	 * @param questions The questions contained within the quiz
+	 */
 	public Quiz(String name, Question[] questions) {		
 		myQuestions = questions;
 		this.name = name;
@@ -13,18 +18,33 @@ public class Quiz {
 		yourAnswers = new String[myQuestions.length];
 	}
 	
+	/**
+	 * Creates a new quiz with no name and 
+	 * sets the Questions array to have 10 null questions
+	 */
 	public Quiz() {
 		this("", new Question[10]);
 	}
 	
+	/**
+	 * @return The question array of this class
+	 */
 	public Question[] getQuestions() {
 		return myQuestions;
 	}
 	
+	/**
+	 * 
+	 * @return the name of this quiz
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Adds a question to this quiz
+	 * @param question The question to add
+	 */
 	public void addQuestion(Question question) {
 		Question[] newArr = new Question[myQuestions.length + 1];
 		for (int i = 0; i < newArr.length - 1; i++)
@@ -36,6 +56,9 @@ public class Quiz {
 		yourAnswers = new String[myQuestions.length];
 	}
 	
+	/**
+	 * Prompts the user to take the quiz
+	 */
 	public void giveQuiz() {
 		int index = 0, correct = 0;
 		for (Question curQues : myQuestions) {
@@ -64,6 +87,11 @@ public class Quiz {
 		}
 	}
 	
+	/**
+	 * Returns the letter grade of the specified percentage
+	 * @param percentage A number between 0 and 100
+	 * @return
+	 */
 	public String toLetterGrade(double percentage) {
 		if (percentage >= 90) {
 			return "A";
@@ -78,6 +106,9 @@ public class Quiz {
 		}
 	}
 	
+	/**
+	 * Returns the questions in this quiz as with new lines between each question
+	 */
 	@Override
 	public String toString() {
 		String out = "";

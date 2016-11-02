@@ -11,6 +11,13 @@ import java.util.Scanner;
 
 public class Parser {
 	
+	/**
+	 * This writes out all the quizes in a quiztime object to file
+	 * @param path The path of the file to write to
+	 * @param quizTime The QuizTime object containing the quizes to 
+	 * 			write out to file
+	 * @throws IOException
+	 */
 	public static void writeQuizesToFile(String path, QuizTime quizTime) throws IOException {
 		StringBuilder output = new StringBuilder();
 		
@@ -22,10 +29,18 @@ public class Parser {
 				output.append(q.getAnswer() + "\n");
 				output.append("endQuestion\n\n");
 			}
-			output.append("endQuiz");
+			output.append("endQuiz\n");
 		}
 		toFile(path, output.toString());
 	}
+	
+	/**
+	 * Parses the specified file for quizes and returns them as 
+	 * a Quiz array
+	 * @param path The file to parse
+	 * @return An array of quizes
+	 * @throws FileNotFoundException
+	 */
 	public static Quiz[] getQuizes(String path) throws FileNotFoundException {
 		ArrayList<Quiz> allQuizes = new ArrayList<Quiz>();
 		ArrayList<Question> quizQuestions = new ArrayList<Question>();
@@ -86,6 +101,12 @@ public class Parser {
 	}
 	
 
+	/**
+	 * Writes a string to a file
+	 * @param path The file to write to
+	 * @param data The data that we want to write to that file
+	 * @throws IOException
+	 */
 	public static void toFile(String path, String data) throws IOException {
 		BufferedWriter fileWriter = new BufferedWriter(new FileWriter(path));	
 		fileWriter.write(data);

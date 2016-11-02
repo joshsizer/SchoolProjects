@@ -31,6 +31,9 @@ public class Main {
 	
 	}
 	
+	/** Prints out the list of possible commands
+	 * 
+	 */
 	public static void printOptions() {
 		String output = "The following are available commands:\n"
 				+ "\tlist\n"
@@ -43,6 +46,13 @@ public class Main {
 		System.out.print(output);
 	}
 	
+	/**
+	 * Performs the desired option
+	 * @param option The integer option
+	 * @param command The command the user entered
+	 * @param quizTime the quizTime object that hold all the 
+	 * 			quizes
+	 */
 	public static void doOption(int option, String command, QuizTime quizTime) {
 		switch (option) {
 		case 1:
@@ -100,6 +110,12 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Returns the integer option of the user's command
+	 * by parsing the input text
+	 * @param command The user's input text
+	 * @return The command that the user chose
+	 */
 	public static int getOption(String command) {
 		if (command.startsWith("list")) {
 			return 1;
