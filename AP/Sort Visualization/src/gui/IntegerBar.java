@@ -24,8 +24,17 @@ public class IntegerBar extends Rectangle {
 		this.int_ = int_;
 	}
 	
+	public void setXPos(int xPos) {
+		this.setLocation(new Point(xPos, this.getLocation().y));
+	}
+	
+	
 	public int getInt() {
 		return this.int_;
+	}
+	
+	public void setInt(int int_) {
+		this.int_ = int_;
 	}
 	
 	public String toString() {
