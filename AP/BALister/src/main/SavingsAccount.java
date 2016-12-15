@@ -8,7 +8,7 @@ package main;
  * 
  */
 
-public class SavingsAccount extends BankAccount
+public class SavingsAccount extends BankAccount implements Comparable<BankAccount>
 {
 	private double interestRate;
 
@@ -41,9 +41,24 @@ public class SavingsAccount extends BankAccount
 	}
 	
 	@Override
+	public int compareTo(BankAccount arg0) {
+		if (!(arg0 instanceof SavingsAccount)) {
+			if (this.getInterestRate() == 0.0) return 0;
+			else return -1;
+		}
+		SavingsAccount s1 = (SavingsAccount)arg0;
+		if (this.getInterestRate() < s1.getInterestRate())
+			return -1;
+		else if (this.getInterestRate() > s1.getInterestRate())
+			return 1;
+		else
+			return 0;
+	}
+	
+	@Override
 	public String toString() {
 		String superRet = super.toString();
-		return superRet + "\nInterest rate: " + interestRate;
+		return "Account Type: SavingsAccount\n" + superRet + "\nInterest rate: " + interestRate;
 	}
 	
 	@Override

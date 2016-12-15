@@ -27,7 +27,7 @@ public class CheckingAccount extends BankAccount {
 	
 	@Override
 	public String toString() {
-		return super.toString() + "\nUnpaid fees: " + (double)feeCount * CheckingAccount.TRANSACTION_FEE
+		return "Account Type: CheckingAccount\n" + super.toString() + "\nUnpaid fees: " + (double)feeCount * CheckingAccount.TRANSACTION_FEE
 				+ "\nTransaction Count: " + this.transactionCount;
 	}
 	

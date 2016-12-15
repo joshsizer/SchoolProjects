@@ -43,7 +43,7 @@ public class SavingsAccount extends BankAccount
 	@Override
 	public String toString() {
 		String superRet = super.toString();
-		return superRet + "\nInterest rate: " + interestRate;
+		return "Account Type: SavingsAccount\n" + superRet + "\nInterest rate: " + interestRate;
 	}
 	
 	@Override

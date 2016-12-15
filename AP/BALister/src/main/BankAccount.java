@@ -13,7 +13,7 @@ import java.util.Arrays;
  *
  */
 
-public class BankAccount 
+public class BankAccount implements Comparable<BankAccount>
 {
 	private double balance;
 	private String name;
@@ -96,6 +96,7 @@ public class BankAccount
 		return "Account holder: " + name + "\nBalance: " + balance;
 	}
 
+	@Override
 	public boolean equals(Object rhs) {
 		if (!(rhs instanceof BankAccount))
 			return false;
@@ -103,6 +104,26 @@ public class BankAccount
 			BankAccount other = (BankAccount) rhs;
 			return getBalance() == other.getBalance() && getName().equals(other.getName());
 		}
+	}
+
+	/**
+	 * Returns -1 if this object comes before the object being compared,
+	 * 1 if it comes after, and 0 if they are the same.
+	 */
+	@Override
+	public int compareTo(BankAccount arg0) {
+		//Exercise 2: compare by balance
+		/*
+		if (this.getBalance() == arg0.getBalance())
+			return 0;
+		else if (this.getBalance() < arg0.getBalance())
+			return -1;
+		else
+			return 1;
+		*/
+		
+		//Exercise 3: compare by name
+		return this.getName().toLowerCase().compareTo(arg0.getName().toLowerCase());
 	}
 
 }
