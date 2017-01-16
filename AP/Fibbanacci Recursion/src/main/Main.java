@@ -1,5 +1,9 @@
 package main;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /**
  * Created by joshs on 1/6/2017.
  *
@@ -27,5 +31,11 @@ public class Main {
 
     System.out.println(slowTime + " iterations without an auxillary array and");
     System.out.println(fastTime + " iterations with an auxillary array.");
+  }
+
+  @Test
+  public void Test() {
+    Fibonacci fib = new Fibonacci();
+    assertEquals(fib.calcEfficient(21), 10946, 0.0);
   }
 }
