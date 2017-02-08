@@ -61,7 +61,7 @@ public class Card {
    * @return this <code>Card's</code> point value.
    */
   public int pointValue() {
-		return this.pointValue;
+    return this.pointValue;
   }
 
   /**
@@ -72,7 +72,7 @@ public class Card {
    * argument; false otherwise.
    */
   public boolean matches(Card otherCard) {
-		return this.suit == otherCard.suit()
+    return this.suit == otherCard.suit()
         && this.rank == otherCard.rank()
         && this.pointValue == otherCard.pointValue();
   }
@@ -88,6 +88,6 @@ public class Card {
    */
   @Override
   public String toString() {
-		return rank() + " of " + suit() + "(point value = " + pointValue() + ")";
+    return rank() + " of " + suit() + "(point value = " + pointValue() + ")";
   }
 }
