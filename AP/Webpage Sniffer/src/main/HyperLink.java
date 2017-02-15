@@ -16,11 +16,19 @@ public class HyperLink {
   /**
    * Creates a HyperLink object by parsing the input string for the first found hyperlink.
    *
-   * @param tag The line to parse
+   * @param link The line to parse
    * @throws MalformedHyperLinkException If a hyperlink is found but is determined to be malformed.
    */
-  public HyperLink(String tag) throws MalformedHyperLinkException {
-    hyperLinkUrl = findLink(tag);
+  public HyperLink(String link) {
+    hyperLinkUrl = link;
+  }
+
+  /**
+   * Gets the URL of this HyperLink
+   * @return
+   */
+  public String getUrl() {
+    return hyperLinkUrl;
   }
 
   /**
@@ -31,9 +39,9 @@ public class HyperLink {
    * @param line The line to parse
    * @return A string containing the link
    */
-  public String findLink(String line) throws MalformedHyperLinkException {
+  public static HyperLink parseLineForHyperLink(String line) throws MalformedHyperLinkException {
     if (!line.contains(HYPER_LINK_TAG_START)) {
-      throw new MalformedHyperLinkException("No start tag found!");
+      return null;
     }
 
     int tagStartIndex = line.indexOf(HYPER_LINK_TAG_START);
@@ -42,17 +50,14 @@ public class HyperLink {
     int tagEndIndex = line.indexOf(HYPER_LINK_TAG_END, linkStartIndex);
 
     if (linkEndIndex == -1 || tagEndIndex == -1) {
-      throw new MalformedHyperLinkException("Could not find a hyper link in the line: " + line);
+      throw new MalformedHyperLinkException("HyperLink is missing end tag" +
+          line);
     }
     String link = line.substring(linkStartIndex, linkEndIndex);
 
     if (!link.startsWith("http")) {
       throw new MalformedHyperLinkException("Link does not conform to http protocol");
     }
-    return link;
-  }
-
-  public String getUrl() {
-    return hyperLinkUrl;
+    return new HyperLink(link);
   }
 }

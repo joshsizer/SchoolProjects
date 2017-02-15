@@ -35,12 +35,12 @@ public class HyperLinkSniffer {
     while (scanner.hasNextLine()) {
       String line = scanner.nextLine();
       try {
-        HyperLink toAdd = new HyperLink(line);
+        HyperLink toAdd = HyperLink.parseLineForHyperLink(line);
         if (toAdd != null) {
           list.add(toAdd);
         }
       } catch (MalformedHyperLinkException e) {
-        // don't really want to do anything about it
+        // don't really want to do anything about it. It'll just muck up the console output
       }
     }
     return list;
