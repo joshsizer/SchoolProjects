@@ -7,8 +7,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Parses a file of coordinates
+ * @author Joshua Sizer
+ *
+ */
 public class FileParser {
   
+  /**
+   * Reads in text from a file
+   * @param file The file object to read from
+   * @return The string contents of this file
+   * @throws IOException If an error occurs accessing or reading the file
+   */
   public static String readFile(File file) throws IOException {
     BufferedReader reader = new BufferedReader(new FileReader(file));
     StringBuilder builder = new StringBuilder();
@@ -24,6 +35,12 @@ public class FileParser {
     return builder.toString();
   }
   
+  /**
+   * Returns a LinkedList of points contained in the file
+   * @param file The file to parse
+   * @return A LinkedLIst of points
+   * @throws IOException
+   */
   public static LinkedList getLinkedList(File file) throws IOException {
     String fileContents = readFile(file);
     LinkedList list = new LinkedList();

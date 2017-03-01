@@ -45,8 +45,10 @@ import java.awt.Color;
 public class DrawShape extends JFrame {
   public static int WIDTH = 800;
   public static int HEIGHT = 800;
-  public static LinkedList list;
+  public static LinkedList listOriginal;
+  public static LinkedList listAfter;
   public static int n = 10;
+  public static String fileName = "Butterfly.txt";
 
   /*
    * main method - creates JFrame
@@ -55,8 +57,8 @@ public class DrawShape extends JFrame {
     DrawShape drawing = new DrawShape();
     drawing.setVisible(true);
     try {
-      list = FileParser.getLinkedList(new File("Bone.txt"));
-      trim(list, 14);
+      listOriginal = FileParser.getLinkedList(new File(fileName));
+      listAfter = trim(listOriginal, n);
       drawing.repaint();
     } catch (IOException e) {
       System.out.println("Could not read file!");
@@ -80,7 +82,17 @@ public class DrawShape extends JFrame {
    */
   public void paint(Graphics g) {
     super.paint(g);
-    
+    drawList(g, listOriginal, Color.RED);
+    drawList(g, listAfter, Color.WHITE);
+  }
+
+  /**
+   * Draws a given LinkedList of Points
+   * @param g The graphics object
+   * @param list The LinkedList of points
+   * @param color The color to draw with
+   */
+  public void drawList(Graphics g, LinkedList list, Color color) {
     if (list != null) {
       Polygon poly;
       int size = list.size();
@@ -96,66 +108,73 @@ public class DrawShape extends JFrame {
         index++;
       }
       poly = new Polygon(xPoints, yPoints, size);
-      g.setColor(Color.WHITE);
+      g.setColor(color);
       g.drawPolygon(poly);
     }
   }
+  /**
+   * Recursively trims the linked list to only have the most important points as nodes
+   * @param list The list of points to trim
+   * @param n The number of final points
+   * @return The trimmed list
+   */
+  public static LinkedList trim(LinkedList list, int n) {
+    if (list.size() <= n) {
+      return list;
+    } else {
+      Node leastImportant = list.getHeadNode();
+      double leastImportantValue = Double.MAX_VALUE;
+      Node p = null, last = null, next = null;
 
-  public static void trim(LinkedList list, int n) {
-    Associated[] nodesByImportance = new Associated[list.size()];
-    Node p = list.getHeadNode();
-    Node last = list.getTailNode();
-    Node next;
-    Point p_, last_, next_;
-    double importance;
-    int index = 0;
-    
-    while (p != null) {
-      next = p.getNext();
-      if (next != null && last != null) {
-        p_ = (Point)p.getData();
-        last_ = (Point)last.getData();
-        next_ = (Point)next.getData();
-        
-        double d1 = p_.distance(last_);
-        double d2 = p_.distance(next_);
-        double d3 = last_.distance(next_);
-        importance = d1 + d2 - d3;
-        Associated a = new Associated(importance, p);
-        nodesByImportance[index] = a;
-        index++;
-      }
-      last = p;
-      p = next;
-    }
-    Arrays.sort(nodesByImportance, new Comparator<Associated>() {
-      public int compare(Associated a1, Associated a2) {
-        if (a1.importance == a2.importance) {
-          return 0;
-        } else if (a1.importance < a2.importance){
-          return -1;
+      //iterate through the whole list to find the least significant node
+      for (int i = 0; i < list.size(); i++) {
+        if (i == 0) {
+          p = list.getHeadNode();
+          last = list.getTailNode();
         } else {
-          return 1;
+          last = p;
+          p = next;
+        }
+        if (i == list.size() - 1) {
+          next = list.getHeadNode();
+        } else {
+          next = p.getNext();
+        }
+        double importance = importance((Point)p.getData(), (Point)last.getData(), (Point)next.getData());
+        // Keep track of a the least important point
+        if (importance < leastImportantValue) {
+          leastImportantValue = importance;
+          leastImportant = p;
         }
       }
-    });
-    System.out.println(Arrays.toString(nodesByImportance));
+      // create a new linked list by adding each point in succession, except for the point that is
+      // least important
+      Node cur = list.getHeadNode();
+      LinkedList ret = new LinkedList();
+      for (int i = 0; i < list.size(); i++) {
+        if (cur.equals(leastImportant)) {
+          cur = cur.getNext();
+          continue;
+        }
+        ret.insertFront((Point)cur.getData());
+        cur = cur.getNext();
+      }
+      return trim(ret, n);
+    }
   }
   
-  public static class Associated {
-    
-    public double importance;
-    public Node node;
-    
-    public Associated(double imp, Node n) {
-      importance = imp;
-      node = n;
-    }
-    
-    @Override
-    public String toString() {
-      return String.valueOf(importance);
-    }
+  /**
+   * Calculates the importance of a point based on the two points next to it
+   * @param p
+   * @param last
+   * @param next
+   * @return A double value of this point's importance
+   */
+  public static double importance(Point p, Point last, Point next) {
+    double d1 = p.distance(last);
+    double d2 = p.distance(next);
+    double d3 = last.distance(next);
+    return d1 + d2 - d3;
   }
 }
 
